@@ -1,0 +1,29 @@
+/* Official Double Eyes wordmark extracted from the supplied brand guidelines. */
+.logo {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.brand-logo {
+  display: block;
+  width: 116px;
+  height: auto;
+}
+
+.footer-logo {
+  transform: none;
+}
+
+.footer-logo .brand-logo {
+  width: 172px;
+}
+
+@media (max-width: 800px) {
+  .footer-logo {
+    transform: none;
+  }
+
+  .footer-logo .brand-logo {
+    width: 142px;
+  }
+}

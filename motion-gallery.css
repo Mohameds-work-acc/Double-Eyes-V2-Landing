@@ -1,0 +1,233 @@
+.motion {
+  position: relative;
+  padding: var(--space-md) 0 var(--space-xl);
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+}
+.motion > .section-meta {
+  margin-inline: var(--page-gutter);
+}
+.motion-wall {
+  display: grid;
+  gap: clamp(14px, 1.5vw, 26px);
+  margin-top: clamp(70px, 8vw, 125px);
+}
+.motion-row {
+  display: grid;
+  gap: clamp(10px, 0.9vw, 16px);
+  width: calc(100% + 5vw);
+  margin-left: -2.5vw;
+  will-change: transform;
+}
+.motion-row--portraits {
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+}
+.motion-row--landscapes,
+.motion-row--lower {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+}
+.motion-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: clamp(16px, 1.45vw, 25px);
+  overflow: hidden;
+  background: #101010;
+  color: #fff;
+  cursor: none;
+  isolation: isolate;
+}
+.motion-row--portraits .motion-tile {
+  grid-column: span 2;
+  aspect-ratio: 4/7;
+}
+.motion-row--portraits .motion-tile:nth-child(4) {
+  transform: translateY(2.2vw);
+}
+.motion-row--portraits .motion-tile:nth-child(6) {
+  transform: translateY(-1.3vw);
+}
+.motion-row--landscapes .motion-tile {
+  grid-column: span 4;
+  aspect-ratio: 16/9;
+}
+.motion-row--landscapes .motion-tile:nth-child(2) {
+  grid-column: span 5;
+  aspect-ratio: 21/9;
+}
+.motion-row--landscapes .motion-tile:nth-child(3) {
+  grid-column: span 3;
+  aspect-ratio: 4/3;
+}
+.motion-row--lower .motion-tile:first-child {
+  grid-column: 1/8;
+  aspect-ratio: 21/9;
+}
+.motion-row--lower .motion-tile:last-child {
+  grid-column: 8/13;
+  aspect-ratio: 16/9;
+}
+.motion-tile video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: brightness(0.62) saturate(0.85);
+  transform: scale(1.015);
+  transition:
+    filter 0.55s var(--ease),
+    transform 0.8s var(--ease);
+}
+.motion-tile:hover video,
+.motion-tile:focus-visible video {
+  filter: brightness(0.94) saturate(1);
+  transform: scale(1.035);
+}
+.motion-tile-meta {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: 0.35s var(--ease);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.motion-tile:hover .motion-tile-meta,
+.motion-tile:focus-visible .motion-tile-meta {
+  opacity: 1;
+  transform: none;
+}
+.motion-tile-meta b {
+  font-weight: 500;
+}
+.motion-tile-meta span {
+  color: var(--orange);
+}
+.motion-tile.signature {
+  border-radius: 999px;
+}
+.motion-tile.signature:after {
+  content: "";
+  position: absolute;
+  right: 8%;
+  top: 12%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 24px rgba(237, 96, 0, 0.7);
+}
+.motion-viewer {
+  width: min(1180px, 94vw);
+  height: min(82vh, 760px);
+  padding: 0;
+  border: 0;
+  background: #000;
+  color: #fff;
+  overflow: visible;
+}
+.motion-viewer::backdrop {
+  background: rgba(0, 0, 0, 0.92);
+}
+.motion-viewer video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+.motion-viewer-close {
+  position: absolute;
+  right: 0;
+  top: -45px;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+}
+.motion-viewer-meta {
+  position: absolute;
+  left: 0;
+  bottom: -42px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.motion-viewer-meta span {
+  color: var(--orange);
+  margin-left: 16px;
+}
+@media (max-width: 800px) {
+  .motion {
+    padding-bottom: var(--space-lg);
+  }
+  .motion-wall {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-inline: var(--page-gutter);
+    margin-top: var(--space-lg);
+  }
+  .motion-row {
+    display: contents;
+  }
+  .motion-tile,
+  .motion-row--portraits .motion-tile,
+  .motion-row--landscapes .motion-tile,
+  .motion-row--lower .motion-tile,
+  .motion-row--landscapes .motion-tile:nth-child(2),
+  .motion-row--landscapes .motion-tile:nth-child(3),
+  .motion-row--lower .motion-tile:first-child,
+  .motion-row--lower .motion-tile:last-child {
+    grid-column: auto;
+    aspect-ratio: 4/5;
+    transform: none;
+    border-radius: 16px;
+  }
+  .motion-tile:nth-child(3n) {
+    grid-column: 1/-1;
+    aspect-ratio: 16/9;
+  }
+  .motion-tile.signature {
+    border-radius: 999px;
+  }
+  .motion-tile-meta {
+    opacity: 1;
+    transform: none;
+    left: 11px;
+    right: 11px;
+    bottom: 10px;
+    font-size: 8px;
+  }
+  .motion-viewer {
+    width: 100vw;
+    height: 72vh;
+  }
+  .motion-viewer-close {
+    right: 18px;
+  }
+  .motion-viewer-meta {
+    left: 18px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-row {
+    transform: none !important;
+  }
+  .motion-tile video {
+    transform: none !important;
+    transition: none;
+  }
+}

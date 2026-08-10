@@ -1,0 +1,31 @@
+.motion > .section-meta {
+  width: calc(100% - var(--page-gutter) * 2);
+  margin-inline: auto;
+}
+.motion-tile {
+  clip-path: inset(10% 0 10% 0 round 20px);
+  opacity: 0.45;
+  transition:
+    clip-path 1.05s var(--ease),
+    opacity 0.8s var(--ease);
+  transition-delay: calc(var(--motion-order) * 45ms);
+}
+.motion.is-visible .motion-tile {
+  clip-path: inset(0 round 0);
+  opacity: 1;
+}
+@media (max-width: 800px) {
+  .motion {
+    padding-top: 92px;
+  }
+  .motion-tile {
+    transition-delay: calc(var(--motion-order) * 28ms);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-tile {
+    clip-path: none;
+    opacity: 1;
+    transition: none;
+  }
+}

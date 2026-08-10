@@ -1,0 +1,192 @@
+/* LOOK AGAIN / LOOK DEEPER - short editorial brand takeover. */
+.pattern-break {
+  --takeover: 0;
+  --release: 0;
+  --deep: 0;
+  --band-inset-y: 37%;
+  --pattern-shift: -2vw;
+  position: relative;
+  height: 145svh;
+  min-height: 980px;
+  overflow: clip;
+  isolation: isolate;
+  display: block;
+  background: #fff;
+  color: #000;
+}
+
+.pattern-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  min-height: 680px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.pattern-band {
+  position: absolute;
+  z-index: 1;
+  inset: var(--band-inset-y) 0;
+  overflow: hidden;
+  clip-path: inset(0 0 calc(var(--release) * 100%) 0);
+  will-change: inset, clip-path;
+}
+
+.pattern-track {
+  position: absolute;
+  inset: -16% -8%;
+  background-color: #fff;
+  background-image: url("assets/patterns/double-eyes-pattern.svg");
+  background-repeat: repeat;
+  background-size: clamp(720px, 53vw, 980px) auto;
+  background-position: var(--pattern-shift) 50%;
+  transform: translate3d(0, 0, 0);
+  animation: none;
+  will-change: background-position;
+}
+
+.pattern-track::after {
+  content: none;
+}
+
+.pattern-message {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  width: min(calc(100% - var(--page-gutter) * 2), var(--content-max));
+  max-width: none;
+  margin-inline: auto;
+  display: block;
+  color: inherit;
+  text-shadow: none;
+  pointer-events: none;
+}
+
+.pattern-primary,
+.pattern-secondary {
+  position: absolute;
+  margin: 0;
+  font: inherit;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.pattern-primary {
+  z-index: 2;
+  top: clamp(92px, 12svh, 132px);
+  left: 0;
+  color: var(--orange);
+  font-size: clamp(92px, 11vw, 190px);
+  line-height: 0.72;
+  letter-spacing: -0.09em;
+  opacity: calc(1 - var(--release));
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(-4vw);
+  transition: clip-path 0.85s var(--ease), transform 0.85s var(--ease);
+}
+
+.pattern-break.is-visible .pattern-primary {
+  clip-path: inset(0);
+  transform: translateX(0);
+}
+
+.pattern-message .pattern-primary span,
+.pattern-message .pattern-secondary span {
+  display: block;
+  margin: 0;
+  max-width: none;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: nowrap;
+  text-align: inherit;
+  -webkit-text-stroke: inherit;
+  text-shadow: none;
+  opacity: 1;
+  transform: none;
+}
+
+.pattern-secondary {
+  z-index: 1;
+  right: 0;
+  bottom: clamp(80px, 10svh, 116px);
+  color: rgb(255 255 255 / var(--takeover));
+  font-size: clamp(70px, 7.8vw, 138px);
+  line-height: 0.75;
+  letter-spacing: -0.08em;
+  text-align: right;
+  -webkit-text-stroke: clamp(1.5px, 0.14vw, 2.5px) #000;
+  opacity: calc((0.76 + var(--deep) * 0.24) * (1 - var(--release)));
+  transform: translateX(calc((1 - var(--deep)) * 3vw));
+  will-change: transform, opacity;
+}
+
+@media (max-width: 800px) {
+  .pattern-break {
+    height: 132svh;
+    min-height: 850px;
+    --band-inset-y: 38%;
+  }
+
+  .pattern-sticky {
+    min-height: 600px;
+  }
+
+  .pattern-track {
+    inset: -18% -30%;
+    background-size: clamp(500px, 130vw, 620px) auto;
+  }
+
+  .pattern-message {
+    width: calc(100% - var(--page-gutter) * 2);
+  }
+
+  .pattern-primary {
+    top: clamp(84px, 11svh, 104px);
+    font-size: clamp(74px, 22vw, 104px);
+    line-height: 0.74;
+  }
+
+  .pattern-secondary {
+    right: 0;
+    bottom: clamp(70px, 9svh, 92px);
+    max-width: 100%;
+    font-size: clamp(58px, 17.5vw, 82px);
+    line-height: 0.78;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 360px) {
+  .pattern-primary {
+    font-size: 21vw;
+  }
+
+  .pattern-secondary {
+    font-size: 16.8vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pattern-break {
+    height: 100svh;
+    min-height: 680px;
+    --band-inset-y: 36%;
+    --takeover: 0;
+    --release: 0;
+    --deep: 1;
+  }
+
+  .pattern-primary {
+    clip-path: inset(0);
+    transform: none;
+    transition: none;
+  }
+
+  .pattern-secondary {
+    opacity: 1;
+    transform: none;
+  }
+}
