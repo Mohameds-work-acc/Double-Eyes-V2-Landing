@@ -17,8 +17,8 @@
     />
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/pattern-fix.css?v=takeover-5" />
-    <link rel="stylesheet" href="styles/motion-gallery.css" />
-    <link rel="stylesheet" href="styles/motion-gallery-responsive.css" />
+    <link rel="stylesheet" href="styles/motion-gallery.css?v=archive-4" />
+    <link rel="stylesheet" href="styles/motion-gallery-responsive.css?v=archive-2" />
     <link rel="stylesheet" href="styles/brand-logo.css" />
     <link rel="stylesheet" href="styles/guides.css" />
     <link rel="stylesheet" href="styles/diagnostic.css" />
@@ -508,19 +508,29 @@
       <section class="motion dark" id="motion" aria-labelledby="motion-title">
         <div class="section-meta">
           <span id="motion-title">05.5 / In motion</span
-          ><span>Things worth watching</span>
+          ><span>A visual archive</span>
+        </div>
+        <div class="motion-intro" aria-hidden="true">
+          <p>Ideas made visible.</p>
+          <h2><span>IN</span> MOTION</h2>
+          <span class="motion-intro-index">WORK / CULTURE / CREATIVE</span>
         </div>
         <div class="motion-wall" id="motionGallery"></div>
-        <dialog class="motion-viewer" aria-label="Motion project viewer">
+        <dialog class="motion-viewer" aria-label="Creative archive image viewer">
           <button
             class="motion-viewer-close"
             type="button"
-            aria-label="Close motion viewer"
+            aria-label="Close image viewer"
           >
             CLOSE ×
           </button>
-          <video controls playsinline></video>
+          <div class="motion-viewer-stage">
+            <img alt="" />
+          </div>
+          <button class="motion-viewer-nav motion-viewer-prev" type="button" aria-label="Previous image">←</button>
+          <button class="motion-viewer-nav motion-viewer-next" type="button" aria-label="Next image">→</button>
           <div class="motion-viewer-meta"><b></b><span></span></div>
+          <span class="motion-viewer-count" aria-live="polite"></span>
         </dialog>
       </section>
 
@@ -729,7 +739,7 @@
         </footer>
       </section>
     </main>
-    <script src="data/motion-gallery.js"></script>
-    <script src="scripts/script.js"></script>
+    <script src="data/motion-gallery.js?v=archive-1"></script>
+    <script src="scripts/script.js?v=archive-1"></script>
   </body>
 </html>

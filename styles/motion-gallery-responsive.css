@@ -1,31 +1,186 @@
-.motion > .section-meta {
-  width: calc(100% - var(--page-gutter) * 2);
-  margin-inline: auto;
+@media (max-width: 1100px) {
+  .motion-intro p {
+    grid-column: 8 / 13;
+  }
+  .motion-band--spotlight {
+    min-height: clamp(440px, 62vw, 650px);
+  }
+  .motion-band--spotlight .motion-tile--hero {
+    grid-column: span 7;
+  }
+  .motion-band--spotlight .motion-tile--portrait {
+    grid-column: span 5;
+  }
+  .motion-band--identity,
+  .motion-band--campaign {
+    min-height: 0;
+  }
+  .motion-band--identity .motion-tile--wide,
+  .motion-band--identity .motion-tile--medium,
+  .motion-band--campaign .motion-tile--medium,
+  .motion-band--campaign .motion-tile--portrait {
+    grid-column: span 6;
+    min-height: clamp(330px, 44vw, 460px);
+  }
+  .motion-band--identity .motion-tile--square,
+  .motion-band--campaign .motion-tile--wide {
+    grid-column: 1 / -1;
+    min-height: clamp(380px, 56vw, 560px);
+  }
+  .motion-band--editorial {
+    min-height: clamp(450px, 64vw, 660px);
+  }
+  .motion-band--editorial .motion-tile--hero {
+    grid-column: span 7;
+  }
+  .motion-band--editorial .motion-tile--medium {
+    grid-column: span 5;
+  }
 }
-.motion-tile {
-  clip-path: inset(10% 0 10% 0 round 20px);
-  opacity: 0.45;
-  transition:
-    clip-path 1.05s var(--ease),
-    opacity 0.8s var(--ease);
-  transition-delay: calc(var(--motion-order) * 45ms);
-}
-.motion.is-visible .motion-tile {
-  clip-path: inset(0 round 0);
-  opacity: 1;
-}
+
 @media (max-width: 800px) {
   .motion {
-    padding-top: 92px;
+    padding: 92px 0 120px;
+  }
+  .motion-intro {
+    min-height: 420px;
+    padding-block: 60px;
+  }
+  .motion-intro p {
+    grid-column: 7 / 13;
+    font-size: 16px;
+  }
+  .motion-intro h2 {
+    grid-column: 1 / -1;
+    margin-top: 62px;
+    font-size: clamp(66px, 22vw, 155px);
+    line-height: 0.82;
+    white-space: normal;
+  }
+  .motion-intro h2 span {
+    display: block;
+  }
+  .motion-intro-index {
+    grid-column: 1 / -1;
+    margin-top: 54px;
+  }
+  .motion-wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: 8px;
+    margin-top: 70px;
+  }
+  .motion-band {
+    display: contents;
+    transform: none !important;
+  }
+  .motion-tile,
+  .motion-band .motion-tile {
+    grid-column: span 1;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+  .motion-band .motion-tile--hero,
+  .motion-band .motion-tile--wide,
+  .motion-band .motion-tile--finale {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 10;
+  }
+  .motion-band--finale .motion-tile {
+    aspect-ratio: 5 / 4;
   }
   .motion-tile {
-    transition-delay: calc(var(--motion-order) * 28ms);
+    transition-delay: calc(var(--motion-order) * 25ms);
+  }
+  .motion-tile::after {
+    opacity: 0.8;
+  }
+  .motion-tile .motion-image img {
+    filter: brightness(0.9) saturate(0.95);
+  }
+  .motion-tile-meta {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    display: block;
+    opacity: 1;
+    transform: none;
+    font-size: 7px;
+    line-height: 1.35;
+  }
+  .motion-tile-meta span {
+    display: block;
+    margin-top: 3px;
+    text-align: left;
+  }
+  .motion-tile-index {
+    top: 10px;
+    left: 10px;
+    font-size: 0;
+  }
+  .motion-viewer {
+    padding: 70px 14px 82px;
+  }
+  .motion-viewer-stage {
+    inset: 70px 14px 82px;
+  }
+  .motion-viewer-close {
+    right: 18px;
+  }
+  .motion-viewer-nav {
+    top: auto;
+    bottom: 18px;
+    width: 38px;
+    height: 38px;
+    transform: none;
+  }
+  .motion-viewer-prev {
+    left: auto;
+    right: 66px;
+  }
+  .motion-viewer-next {
+    right: 18px;
+  }
+  .motion-viewer-meta {
+    left: 18px;
+    bottom: 26px;
+    max-width: calc(100% - 150px);
+  }
+  .motion-viewer-meta span {
+    display: block;
+    margin: 4px 0 0;
+  }
+  .motion-viewer-count {
+    display: none;
   }
 }
+
+@media (max-width: 430px) {
+  .motion-intro {
+    min-height: 390px;
+  }
+  .motion-intro p {
+    grid-column: 6 / 13;
+  }
+  .motion-intro h2 {
+    font-size: clamp(64px, 24vw, 104px);
+  }
+  .motion-wall {
+    width: calc(100% - 20px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .motion-band {
+    transform: none !important;
+  }
   .motion-tile {
     clip-path: none;
     opacity: 1;
+    transition: none;
+  }
+  .motion-image img {
+    transform: none !important;
     transition: none;
   }
 }

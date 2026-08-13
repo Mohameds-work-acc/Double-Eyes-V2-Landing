@@ -4,25 +4,27 @@ const motionGallery = document.querySelector("#motionGallery");
 const motionData = window.motionGalleryData || [];
 
 if (motionGallery && motionData.length) {
-  ["portraits", "landscapes", "lower"].forEach((rowName) => {
-    const row = document.createElement("div");
-    row.className = `motion-row motion-row--${rowName}`;
+  ["spotlight", "identity", "campaign", "editorial", "finale"].forEach(
+    (bandName) => {
+      const band = document.createElement("div");
+      band.className = `motion-band motion-band--${bandName}`;
     motionData
-      .filter((item) => item.row === rowName)
-      .forEach((item, index) => {
+        .filter((item) => item.band === bandName)
+        .forEach((item) => {
         const tile = document.createElement("button");
         const absoluteIndex = motionData.indexOf(item);
         tile.type = "button";
-        tile.className = `motion-tile ratio-${item.ratio}${absoluteIndex === 8 ? " signature" : ""}`;
+          tile.className = `motion-tile motion-tile--${item.layout}`;
         tile.dataset.cursor = "VIEW";
         tile.dataset.motionIndex = absoluteIndex;
         tile.style.setProperty("--motion-order", absoluteIndex);
         tile.setAttribute("aria-label", `View ${item.title}, ${item.category}`);
-        tile.innerHTML = `<video muted loop playsinline preload="metadata" poster="${item.poster}" data-src="${item.src}" aria-hidden="true"></video><span class="motion-tile-meta"><b>${item.title}</b><span>${item.category}</span></span>`;
-        row.appendChild(tile);
+          tile.innerHTML = `<span class="motion-image"><img src="${item.src}" width="${item.width}" height="${item.height}" loading="lazy" decoding="async" alt="${item.alt}" style="object-position:${item.position}"></span><span class="motion-tile-meta"><b>${item.title}</b><span>${item.category}</span></span><span class="motion-tile-index">${String(absoluteIndex + 1).padStart(2, "0")}</span>`;
+          band.appendChild(tile);
       });
-    motionGallery.appendChild(row);
-  });
+      motionGallery.appendChild(band);
+    },
+  );
 }
 // Visual-QA mode prevents smooth scrolling from confusing stitched full-page captures.
 if (new URLSearchParams(location.search).has("visual-qa"))
@@ -320,15 +322,17 @@ if (!touch) {
 
 const motionTiles = [...document.querySelectorAll(".motion-tile")];
 const motionSection = document.querySelector(".motion");
-const motionVideos = motionTiles.map((tile) => tile.querySelector("video"));
 const motionViewer = document.querySelector(".motion-viewer");
-const motionViewerVideo = motionViewer?.querySelector("video");
+const motionViewerImage = motionViewer?.querySelector(".motion-viewer-stage img");
 const motionViewerClose = motionViewer?.querySelector(".motion-viewer-close");
+const motionViewerPrev = motionViewer?.querySelector(".motion-viewer-prev");
+const motionViewerNext = motionViewer?.querySelector(".motion-viewer-next");
 const motionViewerTitle = motionViewer?.querySelector(".motion-viewer-meta b");
 const motionViewerCategory = motionViewer?.querySelector(
   ".motion-viewer-meta span",
 );
-let visibleMotionVideos = [];
+const motionViewerCount = motionViewer?.querySelector(".motion-viewer-count");
+let motionViewerIndex = 0;
 
 if (motionSection) {
   const motionEntranceObserver = new IntersectionObserver(
@@ -343,77 +347,41 @@ if (motionSection) {
   motionEntranceObserver.observe(motionSection);
 }
 
-function loadMotionVideo(video) {
-  if (!video?.src && video?.dataset.src) {
-    video.src = video.dataset.src;
-    video.load();
-  }
+function renderMotionViewer(index) {
+  if (!motionViewerImage || !motionData.length) return;
+  motionViewerIndex = (index + motionData.length) % motionData.length;
+  const item = motionData[motionViewerIndex];
+  motionViewerImage.src = item.full || item.src;
+  motionViewerImage.alt = item.alt;
+  motionViewerTitle.textContent = item.title;
+  motionViewerCategory.textContent = item.category;
+  motionViewerCount.textContent = `${String(motionViewerIndex + 1).padStart(2, "0")} / ${String(motionData.length).padStart(2, "0")}`;
 }
 
-function updateMotionPlayback() {
-  if (reduced || !visibleMotionVideos.length) {
-    motionVideos.forEach((video) => video.pause());
-    return;
-  }
-  const center = innerHeight / 2;
-  const ranked = visibleMotionVideos
-    .map((video) => {
-      const rect = video.getBoundingClientRect();
-      return { video, distance: Math.abs(rect.top + rect.height / 2 - center) };
-    })
-    .sort((a, b) => a.distance - b.distance);
-  const active = new Set(
-    ranked
-      .slice(0, touch || innerWidth <= 800 ? 1 : 6)
-      .map((item) => item.video),
-  );
-  motionVideos.forEach((video) =>
-    active.has(video) ? video.play().catch(() => {}) : video.pause(),
-  );
-}
-
-if (motionVideos.length) {
-  const motionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target;
-        if (entry.isIntersecting) loadMotionVideo(video);
-        visibleMotionVideos = motionVideos.filter((item) => {
-          const rect = item.getBoundingClientRect();
-          return rect.bottom > 0 && rect.top < innerHeight;
-        });
-      });
-      updateMotionPlayback();
-    },
-    { rootMargin: "180px 0px", threshold: [0, 0.18, 0.5] },
-  );
-  motionVideos.forEach((video) => motionObserver.observe(video));
-  addEventListener("scroll", updateMotionPlayback, { passive: true });
+function openMotionViewer(index) {
+  if (!motionViewer || !motionViewerImage) return;
+  renderMotionViewer(index);
+  motionViewer.showModal();
 }
 
 motionTiles.forEach((tile) =>
-  tile.addEventListener("click", () => {
-    if (!motionViewer || !motionViewerVideo) return;
-    const item = motionData[Number(tile.dataset.motionIndex)];
-    motionVideos.forEach((video) => video.pause());
-    motionViewerVideo.src = item.src;
-    motionViewerVideo.poster = item.poster;
-    motionViewerTitle.textContent = item.title;
-    motionViewerCategory.textContent = item.category;
-    motionViewer.showModal();
-    motionViewerVideo.play().catch(() => {});
-  }),
+  tile.addEventListener("click", () =>
+    openMotionViewer(Number(tile.dataset.motionIndex)),
+  ),
 );
 
 function closeMotionViewer() {
   if (!motionViewer?.open) return;
-  motionViewerVideo.pause();
   motionViewer.close();
-  motionViewerVideo.removeAttribute("src");
-  motionViewerVideo.load();
-  updateMotionPlayback();
+  motionViewerImage.removeAttribute("src");
 }
 motionViewerClose?.addEventListener("click", closeMotionViewer);
+motionViewerPrev?.addEventListener("click", () =>
+  renderMotionViewer(motionViewerIndex - 1),
+);
+motionViewerNext?.addEventListener("click", () =>
+  renderMotionViewer(motionViewerIndex + 1),
+);
 motionViewer?.addEventListener("cancel", (event) => {
   event.preventDefault();
   closeMotionViewer();
@@ -422,10 +390,12 @@ motionViewer?.addEventListener("click", (event) => {
   if (event.target === motionViewer) closeMotionViewer();
 });
 addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && motionViewer?.open) {
+  if (!motionViewer?.open) return;
+  if (event.key === "Escape") {
     event.preventDefault();
     closeMotionViewer();
-  }
+  } else if (event.key === "ArrowLeft") renderMotionViewer(motionViewerIndex - 1);
+  else if (event.key === "ArrowRight") renderMotionViewer(motionViewerIndex + 1);
 });
 
 if (!reduced) {
@@ -447,10 +417,10 @@ if (!reduced) {
             ),
           );
           document
-            .querySelectorAll(".motion-row")
+            .querySelectorAll(".motion-band")
             .forEach(
-              (row, index) =>
-                (row.style.transform = `translate3d(${progress * (index % 2 ? -18 : 18)}px,0,0)`),
+              (band, index) =>
+                (band.style.transform = `translate3d(${progress * (index % 2 ? -14 : 14)}px,0,0)`),
             );
         }
         motionParallaxTicking = false;
