@@ -493,9 +493,17 @@ function layoutServiceOrbit() {
   const radiusY = guideRect.height / 2;
   nodes.forEach((node) => {
     const radians = (Number(node.dataset.angle) * Math.PI) / 180;
+    const safeInset = 24;
+    // Keep wide-orbit labels inside the Full Field canvas, including active scale.
+    const halfNodeWidth = node.offsetWidth * 0.56;
+    const rawX = centerX + Math.cos(radians) * radiusX;
+    const x = Math.max(
+      halfNodeWidth + safeInset,
+      Math.min(stageRect.width - halfNodeWidth - safeInset, rawX),
+    );
     node.style.setProperty(
       "--node-x",
-      `${centerX + Math.cos(radians) * radiusX}px`,
+      `${x}px`,
     );
     node.style.setProperty(
       "--node-y",

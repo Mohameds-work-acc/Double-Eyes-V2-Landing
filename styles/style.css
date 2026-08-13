@@ -2003,8 +2003,8 @@ footer small {
   position: absolute;
   left: 50%;
   top: var(--center-y);
-  width: min(calc(100% - clamp(180px, 14vw, 250px)), 1500px);
-  height: min(56vh, 540px);
+  width: min(calc(100% - clamp(64px, 6vw, 110px)), 1650px);
+  height: min(64vh, 600px);
   transform: translate(-50%, -50%);
   overflow: visible;
   pointer-events: none;
@@ -2170,7 +2170,7 @@ footer small {
 .service-node > b {
   display: block;
   font-size: clamp(14px, 1.25vw, 19px);
-  font-weight: 400;
+  font-weight: bold;
   line-height: 1.1;
 }
 .service-node.active {
@@ -2217,8 +2217,8 @@ footer small {
     --center-y: 45%;
   }
   .orbit-guide {
-    width: calc(100% - 150px);
-    height: min(50vh, 430px);
+    width: calc(100% - 90px);
+    height: min(54vh, 460px);
   }
   .universe-center {
     width: 390px;
