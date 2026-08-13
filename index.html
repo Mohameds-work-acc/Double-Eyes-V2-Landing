@@ -15,11 +15,13 @@
       href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="pattern-fix.css?v=takeover-5" />
-    <link rel="stylesheet" href="motion-gallery.css" />
-    <link rel="stylesheet" href="motion-gallery-responsive.css" />
-    <link rel="stylesheet" href="brand-logo.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/pattern-fix.css?v=takeover-5" />
+    <link rel="stylesheet" href="styles/motion-gallery.css" />
+    <link rel="stylesheet" href="styles/motion-gallery-responsive.css" />
+    <link rel="stylesheet" href="styles/brand-logo.css" />
+    <link rel="stylesheet" href="styles/guides.css" />
+    <link rel="stylesheet" href="styles/diagnostic.css" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -55,8 +57,8 @@
         <div class="hero-visual-system">
           <div class="hero-bottom reveal">
             <p>
-              Strategy, identity, content and growth—<br />seen from every
-              angle.
+              Web hook: One connected system built
+              to drive business growth.
             </p>
             <a
               class="round-link"
@@ -96,10 +98,110 @@
         </div>
       </section>
 
+      <section class="guides light" id="guides" aria-labelledby="guides-title">
+        <div class="section-meta guides-meta">
+          <h2 id="guides-title">02 / What guides us</h2>
+          <span>Vision · Mission · Values</span>
+        </div>
+
+        <div class="guides-beliefs">
+          <article class="guides-belief guides-vision">
+            <div class="guides-environment guides-environment-vision" aria-hidden="true">
+              <span class="guides-identity-shape">
+                <img src="Assets/Identity-Lines/guides-vision-identity.png" alt="" />
+                <i></i>
+              </span>
+              <svg class="guides-environment-lines" viewBox="0 0 1000 620" preserveAspectRatio="none">
+                <path class="guides-line-primary" d="M24 552 L814 174" />
+                <path class="guides-line-secondary" d="M238 620 L814 174" />
+              </svg>
+            </div>
+            <span class="guides-index" aria-hidden="true">01</span>
+            <h3 data-guide-reveal><span>OUR</span><span>VISION</span></h3>
+            <p data-guide-reveal>
+              To set a higher regional standard for how businesses approach
+              commercial growth through strategic clarity, connected thinking,
+              and measurable value
+            </p>
+          </article>
+
+          <div class="guides-thread" aria-hidden="true"><i></i></div>
+
+          <article class="guides-belief guides-mission">
+            <div class="guides-environment guides-environment-mission" aria-hidden="true">
+              <span class="guides-identity-shape">
+                <img src="Assets/Identity-Lines/guides-mission-identity.png" alt="" />
+                <i class="guides-pupil-primary"></i>
+                <i class="guides-pupil-secondary"></i>
+              </span>
+              <svg class="guides-environment-lines" viewBox="0 0 1000 620" preserveAspectRatio="none">
+                <path class="guides-line-secondary" d="M18 94 L824 308" />
+                <path class="guides-line-primary" d="M0 308 L824 308" />
+              </svg>
+            </div>
+            <span class="guides-index" aria-hidden="true">02</span>
+            <h3 data-guide-reveal><span>OUR</span><span>MISSION</span></h3>
+            <p data-guide-reveal>
+              We connect market understanding, strategic positioning, and measurable
+              growth systems to help businesses act on real opportunities, strengthen
+              their capabilities, and make clearer decisions about where to go next.
+            </p>
+          </article>
+        </div>
+
+        <div class="guides-values" aria-labelledby="values-title">
+          <div class="guides-values-environment" aria-hidden="true">
+            <span class="guides-values-identity-shape">
+              <img src="Assets/Identity-Lines/guides-values-identity.png" alt="" />
+              <i></i>
+            </span>
+          </div>
+          <div class="guides-values-head">
+            <span aria-hidden="true">03</span>
+            <h3 id="values-title" data-guide-reveal>OUR VALUES<i></i></h3>
+          </div>
+
+          <div class="guides-values-list">
+            <article class="guides-value is-active" data-guide-value tabindex="0">
+              <span class="guides-value-index">01</span>
+              <h4>DIAGNOSIS FIRST</h4>
+              <p>
+                We take the time to understand the business challenge before recommending
+                a course of action.
+              </p>
+              <span class="guides-value-marker" aria-hidden="true"><i></i></span>
+            </article>
+
+            <article class="guides-value" data-guide-value tabindex="0">
+              <span class="guides-value-index">02</span>
+              <h4>SECTOR INTELLIGENCE</h4>
+              <p>
+                We recognize that every sector operates differently and shape our thinking
+                around its dynamics, customers, and measures of success.
+              </p>
+              <span class="guides-value-marker" aria-hidden="true"><i></i></span>
+            </article>
+
+            <article class="guides-value" data-guide-value tabindex="0">
+              <span class="guides-value-index">03</span>
+              <h4>ENGINEERED OUTCOMES</h4>
+              <!-- CLIENT COPY APPEARS INCOMPLETE — awaiting approved ending -->
+              <p>
+                We begin with the intended commercial result and design the work required
+                to achieve
+              </p>
+              <span class="guides-value-marker" aria-hidden="true"><i></i></span>
+            </article>
+          </div>
+        </div>
+
+        <div class="guides-exit" data-guide-exit aria-hidden="true"></div>
+      </section>
+
       <section class="universe dark" id="capabilities">
         <div class="universe-sticky">
           <div class="section-meta">
-            <span>02 / The full field</span
+            <span>03 / The full field</span
             ><span>Scroll through our universe</span>
           </div>
           <div class="universe-stage" data-active-index="0">
@@ -114,9 +216,14 @@
             <span class="active-ray" aria-hidden="true"></span>
             <div class="universe-center">
               <div class="universe-core" aria-hidden="true">
-                <span>36</span>
-                <div class="core-capsule"><i></i></div>
-                <em>°</em>
+                <div class="full-field-identity">
+                  <img
+                    src="Assets/Identity-Lines/identity-double-eyes-04-full-field-mark.png"
+                    alt=""
+                  />
+                  <i class="full-field-pupil full-field-pupil-primary"></i>
+                  <i class="full-field-pupil full-field-pupil-secondary"></i>
+                </div>
               </div>
               <small class="core-kicker"
                 >Every touchpoint. One perspective.</small
@@ -135,47 +242,47 @@
                 data-index="0"
                 data-angle="-90"
                 data-title="Branding"
-                data-copy="We build distinctive systems that hold attention and move with culture."
+                data-copy="Establish a distinctive and credible market position."
               >
-                <i></i><span>01</span><b>Branding</b>
+                <i></i><span>01</span><b>Positioning & Identity</b>
               </button>
               <button
                 class="service-node"
                 data-index="1"
                 data-angle="-28"
                 data-title="Strategy"
-                data-copy="Clarity before noise. We find the sharpest path from ambition to action."
+                data-copy="Build trust, relevance, authority, and organic discovery."
               >
-                <i></i><span>02</span><b>Strategy</b>
+                <i></i><span>02</span><b>Authority & Visible Content</b>
               </button>
               <button
                 class="service-node"
                 data-index="2"
                 data-angle="28"
                 data-title="Content"
-                data-copy="Stories designed for the way people watch, share and remember."
+                data-copy="Turn market attention into qualified opportunities."
               >
-                <i></i><span>03</span><b>Content</b>
+                <i></i><span>03</span><b> Acquisition & Conversion</b>
               </button>
               <button
                 class="service-node"
                 data-index="3"
                 data-angle="90"
                 data-title="Performance"
-                data-copy="Campaign systems that turn attention into measurable momentum."
+                data-copy="Strengthen experience, continuity, and long-term customer value."
               >
-                <i></i><span>04</span><b>Performance</b>
+                <i></i><span>04</span><b>Customer Relationship & Retention</b>
               </button>
               <button
                 class="service-node"
                 data-index="4"
                 data-angle="152"
                 data-title="Digital"
-                data-copy="Digital experiences where every interaction carries the brand."
+                data-copy="Use ongoing insight to keep every system aligned and improving."
               >
-                <i></i><span>05</span><b>Digital</b>
+                <i></i><span>05</span><b>Vision Alignment & Performance Optimization</b>
               </button>
-              <button
+              <!-- <button
                 class="service-node"
                 data-index="5"
                 data-angle="208"
@@ -183,7 +290,136 @@
                 data-copy="Films, worlds and moments made with cinematic intent."
               >
                 <i></i><span>06</span><b>Production</b>
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="diagnostic dark"
+        id="diagnostic"
+        aria-labelledby="diagnostic-title"
+        data-diagnostic-active="0"
+      >
+        <div class="diagnostic-sticky">
+          <div class="section-meta diagnostic-meta">
+            <span>04 / Strategic Diagnostic Model</span>
+            <span>Four dimensions &middot; One diagnostic lens</span>
+          </div>
+
+          <div class="diagnostic-layout">
+            <header class="diagnostic-intro">
+              <h2 id="diagnostic-title">
+                <span>STRATEGIC</span>
+                <span>DIAGNOSTIC</span>
+                <span>MODEL</span>
+              </h2>
+              <p>A structured lens for understanding where growth is shaped.</p>
+            </header>
+
+            <div
+              class="diagnostic-map"
+              role="group"
+              aria-label="Four dimensions of the Strategic Diagnostic Model"
+            >
+            <div class="diagnostic-structure" aria-hidden="true">
+              <span class="diagnostic-axis diagnostic-axis-horizontal"></span>
+              <span class="diagnostic-axis diagnostic-axis-vertical"></span>
+              <span class="diagnostic-ray diagnostic-ray-business"></span>
+              <span class="diagnostic-ray diagnostic-ray-market"></span>
+              <span class="diagnostic-ray diagnostic-ray-journey"></span>
+              <span class="diagnostic-ray diagnostic-ray-performance"></span>
+              <span class="diagnostic-focus-line"></span>
+            </div>
+
+            <div class="diagnostic-core" aria-hidden="true">
+              <span>STRATEGIC</span>
+              <strong>DIAGNOSTIC MODEL</strong>
+              <i></i>
+            </div>
+
+            <article class="diagnostic-cluster is-active" data-diagnostic-cluster>
+              <button
+                class="diagnostic-node"
+                type="button"
+                data-diagnostic-node
+                aria-expanded="true"
+                aria-controls="diagnostic-business-topics"
+              >
+                <span>01</span><strong>Business</strong><i aria-hidden="true"></i>
               </button>
+              <div class="diagnostic-topics" id="diagnostic-business-topics">
+                <ul>
+                  <li style="--topic-index: 0">Branding</li>
+                  <li style="--topic-index: 1">Positioning</li>
+                  <li style="--topic-index: 2">Value proposition</li>
+                  <li style="--topic-index: 3">Business priorities</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="diagnostic-cluster" data-diagnostic-cluster>
+              <button
+                class="diagnostic-node"
+                type="button"
+                data-diagnostic-node
+                aria-expanded="false"
+                aria-controls="diagnostic-market-topics"
+              >
+                <span>02</span><strong>Market</strong><i aria-hidden="true"></i>
+              </button>
+              <div class="diagnostic-topics" id="diagnostic-market-topics">
+                <ul>
+                  <li style="--topic-index: 0">Sector dynamics</li>
+                  <li style="--topic-index: 1">Audience</li>
+                  <li style="--topic-index: 2">Competition</li>
+                  <li style="--topic-index: 3">Demand</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="diagnostic-cluster" data-diagnostic-cluster>
+              <button
+                class="diagnostic-node"
+                type="button"
+                data-diagnostic-node
+                aria-expanded="false"
+                aria-controls="diagnostic-journey-topics"
+              >
+                <span>03</span><strong>Customer Journey</strong
+                ><i aria-hidden="true"></i>
+              </button>
+              <div class="diagnostic-topics" id="diagnostic-journey-topics">
+                <ul>
+                  <li style="--topic-index: 0">Acquisition</li>
+                  <li style="--topic-index: 1">Experience</li>
+                  <li style="--topic-index: 2">Conversion</li>
+                  <li style="--topic-index: 3">Retention</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="diagnostic-cluster" data-diagnostic-cluster>
+              <button
+                class="diagnostic-node"
+                type="button"
+                data-diagnostic-node
+                aria-expanded="false"
+                aria-controls="diagnostic-performance-topics"
+              >
+                <span>04</span><strong>Performance</strong
+                ><i aria-hidden="true"></i>
+              </button>
+              <div class="diagnostic-topics" id="diagnostic-performance-topics">
+                <ul>
+                  <li style="--topic-index: 0">Digital infrastructure</li>
+                  <li style="--topic-index: 1">KPIs</li>
+                  <li style="--topic-index: 2">Performance analytics</li>
+                  <li style="--topic-index: 3">Operational scalability</li>
+                </ul>
+              </div>
+            </article>
             </div>
           </div>
         </div>
@@ -191,7 +427,7 @@
 
       <section class="work light" id="work">
         <div class="section-meta">
-          <span>03 / Selected work</span
+          <span>05 / Selected work</span
           ><span>Stories worth a second look</span>
         </div>
         <h2 class="section-title reveal">
@@ -272,7 +508,7 @@
 
       <section class="motion dark" id="motion" aria-labelledby="motion-title">
         <div class="section-meta">
-          <span id="motion-title">03.5 / In motion</span
+          <span id="motion-title">05.5 / In motion</span
           ><span>Things worth watching</span>
         </div>
         <div class="motion-wall" id="motionGallery"></div>
@@ -312,7 +548,7 @@
       <section class="method dark" id="method">
         <div class="method-sticky">
           <div class="section-meta">
-            <span>04 / How we think</span
+            <span>06 / How we think</span
             ><span>From observation to momentum</span>
           </div>
           <div class="method-grid">
@@ -395,7 +631,7 @@
 
       <section class="capabilities light" id="services">
         <div class="section-meta">
-          <span>05 / Capabilities</span><span>The practical view</span>
+          <span>07 / Capabilities</span><span>The practical view</span>
         </div>
         <div class="cap-head">
           <h2 class="section-title reveal">ONE PARTNER.<br />EVERY ANGLE.</h2>
@@ -495,6 +731,6 @@
       </section>
     </main>
     <script src="data/motion-gallery.js"></script>
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
   </body>
 </html>

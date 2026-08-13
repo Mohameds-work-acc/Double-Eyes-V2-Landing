@@ -472,7 +472,7 @@ button {
   border: 0;
   background: none;
   color: #777;
-  font-size: clamp(14px, 1.4vw, 22px);
+  font-size: clamp(14px, 1vw, 22px);
   cursor: none;
   transition: 0.5s var(--ease);
   white-space: nowrap;
@@ -483,6 +483,12 @@ button {
   color: var(--orange);
   letter-spacing: 0.2em;
 }
+
+.service-node b {
+  
+  font-size: 15px !important;
+}
+
 .service-node:before {
   content: "";
   display: block;
@@ -2027,53 +2033,47 @@ footer small {
   position: relative;
   inset: auto;
   transform: none;
-  width: auto;
+  width: clamp(300px, 32vw, 480px);
   height: auto;
   border: 0;
   border-radius: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   color: #fff;
 }
-.universe-core > span {
+
+.full-field-identity {
   position: relative;
-  left: auto;
-  font-size: clamp(76px, 7vw, 112px);
-  font-weight: 700;
-  line-height: 0.78;
-  letter-spacing: -0.11em;
-  z-index: 2;
+  width: 100%;
+  aspect-ratio: 2259 / 813;
+  transform-origin: center;
+  transition: transform 0.5s var(--ease), opacity 0.5s var(--ease);
 }
-.core-capsule {
-  position: relative;
-  width: clamp(190px, 18vw, 275px);
-  height: clamp(88px, 8.3vw, 126px);
-  margin-left: clamp(-8px, -0.5vw, -2px);
-  border: clamp(18px, 1.8vw, 27px) solid #fff;
-  border-radius: 100px;
+
+.full-field-identity > img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
-.core-capsule > i {
+
+.full-field-pupil {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: clamp(16px, 1.5vw, 23px);
-  height: clamp(16px, 1.5vw, 23px);
+  top: 74.17%;
+  width: 3.55%;
+  aspect-ratio: 1;
   border-radius: 50%;
   background: var(--orange);
-  transform: translate(-50%, -50%) translate(var(--look-x, 0), var(--look-y, 0));
+  transform: translate(-50%, -50%)
+    translate(var(--look-x, 0), var(--look-y, 0));
   box-shadow: 0 0 30px rgba(237, 96, 0, 0.7);
   transition: transform 0.5s var(--ease);
 }
-.universe-core > em {
-  position: relative;
-  right: auto;
-  top: auto;
-  align-self: flex-start;
-  margin: 0 0 0 9px;
-  font-size: clamp(24px, 2.5vw, 38px);
-  font-style: normal;
-  line-height: 1;
+
+.full-field-pupil-primary {
+  left: 53.03%;
+}
+
+.full-field-pupil-secondary {
+  left: 91.41%;
 }
 .core-kicker {
   position: static;

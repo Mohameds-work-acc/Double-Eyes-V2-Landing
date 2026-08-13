@@ -38,9 +38,9 @@
   position: absolute;
   inset: -16% -8%;
   background-color: #fff;
-  background-image: url("Assets/patterns/double-eyes-pattern.svg");
-  background-repeat: repeat;
-  background-size: clamp(720px, 53vw, 980px) auto;
+  background-image: url("../Assets/Identity-Lines/identity-double-eyes-11.png");
+  background-repeat: no-repeat;
+  background-size: cover;
   background-position: var(--pattern-shift) 50%;
   transform: translate3d(0, 0, 0);
   animation: none;
