@@ -5,6 +5,16 @@
   background: #000;
   color: #fff;
 }
+
+/* Final brand simplification: a denser archive with source-aware proportions. */
+.motion { padding-block: clamp(90px, 8vw, 135px); }
+.motion-intro { min-height: clamp(330px, 38vw, 540px); padding-block: clamp(42px, 5vw, 76px); }
+.motion-wall { margin-top: clamp(48px, 5vw, 78px); }
+.motion-band--spotlight { min-height: clamp(420px, 45vw, 650px); }
+.motion-band--identity { min-height: clamp(280px, 24vw, 400px); }
+.motion-band--campaign { min-height: clamp(320px, 30vw, 480px); }
+.motion-band--editorial { min-height: clamp(360px, 35vw, 560px); }
+.motion-band--finale { display: none; }
 .motion > .section-meta,
 .motion-intro,
 .motion-wall {
@@ -151,6 +161,13 @@
   transition:
     filter 0.55s var(--ease),
     transform 0.85s var(--ease);
+}
+.motion-band--identity .motion-image img,
+.motion-band--campaign .motion-image img,
+.motion-band--editorial .motion-image img {
+  object-fit: contain;
+  background: #0d0d0d;
+  transform: none;
 }
 .motion-tile::after {
   content: "";

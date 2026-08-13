@@ -15,13 +15,14 @@
       href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/style.css?v=audit-2" />
     <link rel="stylesheet" href="styles/pattern-fix.css?v=takeover-5" />
-    <link rel="stylesheet" href="styles/motion-gallery.css?v=archive-4" />
+    <link rel="stylesheet" href="styles/motion-gallery.css?v=archive-5" />
     <link rel="stylesheet" href="styles/motion-gallery-responsive.css?v=archive-2" />
     <link rel="stylesheet" href="styles/brand-logo.css" />
     <link rel="stylesheet" href="styles/guides.css" />
-    <link rel="stylesheet" href="styles/diagnostic.css" />
+    <link rel="stylesheet" href="styles/diagnostic.css?v=audit-2" />
+    <link rel="stylesheet" href="styles/final-refinement.css?v=audit-2" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -36,7 +37,7 @@
         ><img class="brand-logo" src="Assets/brand/double-eyes-logo-light.png" alt="Double Eyes" /></a
       >
       <nav aria-label="Primary">
-        <a href="#work">Work</a><a href="#capabilities">Capabilities</a
+        <a href="#motion">Work</a><a href="#capabilities">What we do</a
         ><a href="#about">Perspective</a>
       </nav>
       <a class="nav-cta" href="#contact">Start a project <span>↗</span></a>
@@ -47,11 +48,11 @@
 
     <main id="main">
       <section class="hero dark" id="top">
-        <div class="hero-glow"></div>
+        <img class="hero-saudi-visual" src="Assets/motion/Images/optimized/future-lens-01.jpg" alt="" aria-hidden="true" />
         <p class="eyebrow reveal">Independent creative company / Riyadh</p>
         <h1 aria-label="We see what others miss">
           <span class="hero-line reveal">WE SEE</span
-          ><span class="hero-line outline reveal">WHAT OTHERS</span
+          ><span class="hero-line reveal">WHAT OTHERS</span
           ><span class="hero-line reveal">MISS<i>.</i></span>
         </h1>
         <div class="hero-visual-system">
@@ -62,28 +63,16 @@
             </p>
             <a
               class="round-link"
-              href="#work"
-              aria-label="Explore selected work"
-              >Explore<br />work <b>↓</b></a
+              href="#motion"
+              aria-label="Explore more creative work"
+              >Explore<br />more <img src="Assets/Identity-Lines/identity-double-eyes-04-full-field-mark.png" alt="" /></a
             >
           </div>
-          <div class="hero-eye interactive-eye" aria-hidden="true">
-            <i></i><small>360°</small>
-          </div>
-          <div class="hero-orbit" aria-hidden="true">
-            <div class="orbit-ring"></div>
-            <div class="orbit-dot"></div>
-          </div>
-        </div>
-        <div class="scroll-cue">
-          <span>Scroll to shift perspective</span><i></i>
         </div>
       </section>
 
       <section class="statement light" id="about">
-        <div class="section-meta">
-          <span>01 / Perspective</span><span>Riyadh · Cairo · Everywhere</span>
-        </div>
+        <div class="section-meta"><span>01 / Perspective</span></div>
         <p class="statement-copy reveal">
           Most agencies look at a brief.<br /><strong
             >We look through it.</strong
@@ -94,14 +83,12 @@
             Two eyes. One complete point of view. We connect culture,
             creativity, and performance to make brands impossible to overlook.
           </p>
-          <div class="mini-eye interactive-eye" aria-hidden="true"><i></i></div>
         </div>
       </section>
 
       <section class="guides light" id="guides" aria-labelledby="guides-title">
         <div class="section-meta guides-meta">
           <h2 id="guides-title">02 / What guides us</h2>
-          <span>Vision · Mission · Values</span>
         </div>
 
         <div class="guides-beliefs">
@@ -185,11 +172,7 @@
             <article class="guides-value" data-guide-value tabindex="0">
               <span class="guides-value-index">03</span>
               <h4>ENGINEERED OUTCOMES</h4>
-              <!-- CLIENT COPY APPEARS INCOMPLETE — awaiting approved ending -->
-              <p>
-                We begin with the intended commercial result and design the work required
-                to achieve
-              </p>
+              <!-- TODO: APPROVED CLIENT COPY REQUIRED. The supplied Engineered Outcomes sentence is incomplete and is intentionally not published. -->
               <span class="guides-value-marker" aria-hidden="true"><i></i></span>
             </article>
           </div>
@@ -200,10 +183,7 @@
 
       <section class="universe dark" id="capabilities">
         <div class="universe-sticky">
-          <div class="section-meta">
-            <span>03 / The full field</span
-            ><span>Scroll through our universe</span>
-          </div>
+          <div class="section-meta"><span>03 / The full field</span></div>
           <div class="universe-stage" data-active-index="0">
             <svg
               class="orbit-guide"
@@ -282,15 +262,6 @@
               >
                 <i></i><span>05</span><b>Vision Alignment & <br> Performance Optimization</b>
               </button>
-              <!-- <button
-                class="service-node"
-                data-index="5"
-                data-angle="208"
-                data-title="Production"
-                data-copy="Films, worlds and moments made with cinematic intent."
-              >
-                <i></i><span>06</span><b>Production</b>
-              </button> -->
             </div>
           </div>
         </div>
@@ -299,40 +270,20 @@
       <section
         class="diagnostic dark"
         id="diagnostic"
-        aria-labelledby="diagnostic-title"
+        aria-label="04 / Strategic Diagnostic Model"
         data-diagnostic-active="0"
       >
         <div class="diagnostic-sticky">
           <div class="section-meta diagnostic-meta">
             <span>04 / Strategic Diagnostic Model</span>
-            <span>Four dimensions &middot; One diagnostic lens</span>
           </div>
 
           <div class="diagnostic-layout">
-            <header class="diagnostic-intro">
-              <h2 id="diagnostic-title">
-                <span>STRATEGIC</span>
-                <span>DIAGNOSTIC</span>
-                <span>MODEL</span>
-              </h2>
-              <p>A structured lens for understanding where growth is shaped.</p>
-            </header>
-
             <div
               class="diagnostic-map"
               role="group"
               aria-label="Four dimensions of the Strategic Diagnostic Model"
             >
-            <div class="diagnostic-structure" aria-hidden="true">
-              <span class="diagnostic-axis diagnostic-axis-horizontal"></span>
-              <span class="diagnostic-axis diagnostic-axis-vertical"></span>
-              <span class="diagnostic-ray diagnostic-ray-business"></span>
-              <span class="diagnostic-ray diagnostic-ray-market"></span>
-              <span class="diagnostic-ray diagnostic-ray-journey"></span>
-              <span class="diagnostic-ray diagnostic-ray-performance"></span>
-              <span class="diagnostic-focus-line"></span>
-            </div>
-
             <div class="diagnostic-core" aria-hidden="true">
               <span>STRATEGIC</span>
               <strong>DIAGNOSTIC MODEL</strong>
@@ -425,95 +376,13 @@
         </div>
       </section>
 
-      <!-- <section class="work light" id="work">
-        <div class="section-meta">
-          <span>05 / Selected work</span
-          ><span>Stories worth a second look</span>
-        </div>
-        <h2 class="section-title reveal">
-          WORK THAT<br /><em>HOLDS</em> THE GAZE.
-        </h2>
-        <div class="projects">
-          <article class="project project-wide" data-cursor="VIEW">
-            <a href="#contact"
-              ><figure>
-                <img
-                  src="Assets/projects/neom.jpg"
-                  alt="Contemporary architectural forms in warm light"
-                />
-                <div class="project-shutter"></div>
-              </figure>
-              <div class="project-info">
-                <span>01 / Place branding</span>
-                <h3>NOOR DISTRICT</h3>
-                <p>A new language for a city built toward the light.</p>
-                <b>2026 ↗</b>
-              </div></a
-            >
-          </article>
-          <article class="project" data-cursor="VIEW">
-            <a href="#contact"
-              ><figure>
-                <img
-                  src="Assets/projects/desert.jpg"
-                  alt="Cinematic desert landscape"
-                />
-                <div class="project-shutter"></div>
-              </figure>
-              <div class="project-info">
-                <span>02 / Campaign</span>
-                <h3>THE OPEN HORIZON</h3>
-                <p>Turning a destination into a feeling.</p>
-                <b>2026 ↗</b>
-              </div></a
-            >
-          </article>
-          <article class="project project-offset" data-cursor="VIEW">
-            <a href="#contact"
-              ><figure>
-                <img
-                  src="Assets/projects/object.jpg"
-                  alt="Sculptural product still life"
-                />
-                <div class="project-shutter"></div>
-              </figure>
-              <div class="project-info">
-                <span>03 / Luxury identity</span>
-                <h3>FORM / 01</h3>
-                <p>Desire, distilled to its essential shape.</p>
-                <b>2025 ↗</b>
-              </div></a
-            >
-          </article>
-          <article class="project project-wide" data-cursor="VIEW">
-            <a href="#contact"
-              ><figure>
-                <img
-                  src="Assets/projects/future.jpg"
-                  alt="Abstract technology detail"
-                />
-                <div class="project-shutter"></div>
-              </figure>
-              <div class="project-info">
-                <span>04 / Digital experience</span>
-                <h3>SIGNAL &amp; SCALE</h3>
-                <p>Making complex technology feel brilliantly clear.</p>
-                <b>2025 ↗</b>
-              </div></a
-            >
-          </article>
-        </div>
-      </section> -->
-
       <section class="motion dark" id="motion" aria-labelledby="motion-title">
         <div class="section-meta">
-          <span id="motion-title">05.5 / In motion</span
-          ><span>A visual archive</span>
+          <span id="motion-title">05 / In motion</span>
         </div>
         <div class="motion-intro" aria-hidden="true">
           <p>Ideas made visible.</p>
           <h2><span>IN</span> MOTION</h2>
-          <span class="motion-intro-index">WORK / CULTURE / CREATIVE</span>
         </div>
         <div class="motion-wall" id="motionGallery"></div>
         <dialog class="motion-viewer" aria-label="Creative archive image viewer">
@@ -540,9 +409,6 @@
         aria-labelledby="pattern-title"
       >
         <div class="pattern-sticky">
-          <div class="pattern-band" aria-hidden="true">
-            <div class="pattern-track"></div>
-          </div>
           <div class="pattern-message">
             <h2 class="pattern-primary" id="pattern-title" aria-label="Look again">
               <span>LOOK</span><span>AGAIN</span>
@@ -554,178 +420,31 @@
         </div>
       </section>
 
-      <section class="method dark" id="method">
-        <div class="method-sticky">
-          <div class="section-meta">
-            <span>06 / How we think</span
-            ><span>From observation to momentum</span>
-          </div>
-          <div class="method-grid">
-            <div
-              class="method-words"
-              aria-label="See, Think, Create, Move, Grow"
-            >
-              <span class="active">SEE</span><span>THINK</span
-              ><span>CREATE</span><span>MOVE</span><span>GROW</span>
-            </div>
-            <div class="method-visual" aria-hidden="true">
-              <div class="lens lens-a"></div>
-              <div class="lens lens-b"></div>
-              <i></i>
-            </div>
-            <div class="method-copy">
-              <span>01—05</span>
-              <p>
-                First we widen the frame. Then we find the one idea strong
-                enough to move everything.
-              </p>
-            </div>
-          </div>
-          <div class="method-progress" aria-hidden="true">
-            <span class="method-progress-current">01</span><i></i
-            ><span>05</span>
-          </div>
-          <div class="method-stage" aria-live="polite">
-            <article class="method-scene scene-see" data-method-scene>
-              <span class="method-index">01 / 05</span>
-              <h2>SEE</h2>
-              <div class="scene-eye see-eye" aria-hidden="true">
-                <i></i><i></i><b></b>
-              </div>
-              <p>We widen the frame before deciding where to focus.</p>
-            </article>
-            <article class="method-scene scene-think" data-method-scene>
-              <span class="method-index">02 / 05</span>
-              <h2 aria-label="THINK">
-                TH<span class="think-i" aria-hidden="true"><b></b><i></i></span
-                >NK
-              </h2>
-              <div class="scene-eye think-eye" aria-hidden="true">
-                <i></i><i></i><b></b>
-              </div>
-              <p>We connect what we observe until a clear direction appears.</p>
-            </article>
-            <article class="method-scene scene-create" data-method-scene>
-              <span class="method-index">03 / 05</span>
-              <h2>CREATE</h2>
-              <div class="scene-eye create-eye" aria-hidden="true">
-                <i></i><i></i><b></b><b></b>
-              </div>
-              <p>
-                We turn direction into something people can see, feel and
-                remember.
-              </p>
-            </article>
-            <article class="method-scene scene-move" data-method-scene>
-              <span class="method-index">04 / 05</span>
-              <h2>MOVE</h2>
-              <div class="scene-eye move-eye" aria-hidden="true">
-                <i></i><i></i><b></b>
-              </div>
-              <p>We put ideas into motion across the moments that matter.</p>
-            </article>
-            <article class="method-scene scene-grow" data-method-scene>
-              <span class="method-index">05 / 05</span>
-              <h2>GROW</h2>
-              <div class="scene-eye grow-eye" aria-hidden="true">
-                <i></i><i></i><b></b>
-              </div>
-              <p>
-                We learn, refine and build momentum beyond the first result.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="capabilities light" id="services">
-        <div class="section-meta">
-          <span>07 / Capabilities</span><span>The practical view</span>
-        </div>
-        <div class="cap-head">
-          <h2 class="section-title reveal">ONE PARTNER.<br />EVERY ANGLE.</h2>
-          <p>
-            Built to work as one connected team, from the first question to the
-            final result.
-          </p>
-        </div>
-        <div class="cap-list">
-          <details open>
-            <summary>
-              <b>01</b><span>Branding + Advertising</span><i>+</i>
-            </summary>
-            <div>
-              <p>
-                Brand strategy, verbal identity, visual systems, campaigns and
-                toolkits.
-              </p>
-              <em class="service-art art-brand"></em>
-            </div>
-          </details>
-          <details>
-            <summary><b>02</b><span>Strategy + Research</span><i>+</i></summary>
-            <div>
-              <p>
-                Market intelligence, positioning, audience definition and
-                creative direction.
-              </p>
-              <em class="service-art art-strategy"></em>
-            </div>
-          </details>
-          <details>
-            <summary><b>03</b><span>Social + Content</span><i>+</i></summary>
-            <div>
-              <p>
-                Always-on storytelling, editorial systems, copywriting and
-                community.
-              </p>
-              <em class="service-art art-social"></em>
-            </div>
-          </details>
-          <details>
-            <summary>
-              <b>04</b><span>Performance + Growth</span><i>+</i>
-            </summary>
-            <div>
-              <p>Media, search, conversion, analytics and growth programmes.</p>
-              <em class="service-art art-growth"></em>
-            </div>
-          </details>
-          <details>
-            <summary><b>05</b><span>Film + Experiences</span><i>+</i></summary>
-            <div>
-              <p>
-                Films, motion, digital platforms, activations and immersive
-                experiences.
-              </p>
-              <em class="service-art art-film"></em>
-            </div>
-          </details>
-        </div>
-      </section>
-
-      <section class="proof dark">
-        <p>IN GOOD COMPANY</p>
-        <div class="logo-cloud">
-          <span>ROSHN</span><span>NEOM</span><span>stc</span><span>ALULA</span
-          ><span>MDLBEAST</span><span>misk</span>
-        </div>
-      </section>
-
       <section class="contact dark" id="contact">
         <p class="eyebrow">The next thing worth seeing</p>
-        <a
-          href="mailto:hello@doubleeyes.sa"
+        <button
+          type="button"
           class="contact-link"
           data-cursor="WRITE"
-          aria-label="Write to Double Eyes about a project"
+          aria-label="Open the Double Eyes contact form"
+          aria-controls="contact-form"
+          aria-expanded="false"
           ><span>GIVE US</span><span>SOMETHING</span
           ><span>TO LOOK AT<i>.</i></span
-          ><small class="contact-hint">WRITE TO US <b>↗</b></small></a
+          ><small class="contact-hint">WRITE TO US <b>↗</b></small></button
         >
-        <div class="contact-eye interactive-eye" aria-hidden="true">
-          <i></i>
-        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="contact-form-head"><span>START A CONVERSATION</span><button type="button" class="contact-form-close" aria-label="Close contact form">CLOSE ×</button></div>
+          <label>Name *<input name="name" type="text" autocomplete="name" required /></label>
+          <label>Company<input name="company" type="text" autocomplete="organization" /></label>
+          <label>Email *<input name="email" type="email" autocomplete="email" required /></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" /></label>
+          <label>Service / What can we help with?<input name="service" type="text" /></label>
+          <label class="contact-form-message">Message *<textarea name="message" rows="4" required></textarea></label>
+          <p class="contact-form-status" aria-live="polite"></p>
+          <button class="contact-form-submit" type="submit">SEND ENQUIRY <span>↗</span></button>
+        </form>
+        <img class="contact-identity" src="Assets/Identity-Lines/identity-double-eyes-04-full-field-mark.png" alt="" aria-hidden="true" />
         <footer>
           <a class="logo footer-logo" href="#top" aria-label="Double Eyes home"
             ><img class="brand-logo" src="Assets/brand/double-eyes-logo-light.png" alt="Double Eyes" /></a
@@ -739,7 +458,7 @@
         </footer>
       </section>
     </main>
-    <script src="data/motion-gallery.js?v=archive-1"></script>
-    <script src="scripts/script.js?v=archive-1"></script>
+    <script src="data/motion-gallery.js?v=audit-2"></script>
+    <script src="scripts/script.js?v=audit-2"></script>
   </body>
 </html>

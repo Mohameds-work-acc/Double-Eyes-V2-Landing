@@ -1,0 +1,39 @@
+/* Final approved brand amendments. */
+.hero { background:#000; isolation:isolate; }
+.hero-saudi-visual { position:absolute; z-index:0; inset:0 0 0 auto; width:min(68vw,1100px); height:100%; object-fit:cover; object-position:66% center; opacity:.82; mask-image:linear-gradient(90deg,transparent 0%,#000 28%); }
+.hero h1,.hero>.eyebrow,.hero-visual-system { position:relative; z-index:2; }
+.hero-line.outline { color:#fff; -webkit-text-stroke:0; margin-left:8vw; }
+.round-link img { display:block; width:34px; height:auto; margin:10px auto 0; filter:brightness(0) invert(1); }
+.guides { background:#f7f7f5; }
+.guides-environment,.guides-thread,.guides-values-environment,.guides-exit,.guides-value-marker,.guides-values-list::before,.guides-values-list::after { display:none !important; }
+.guides-beliefs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; padding:clamp(60px,7vw,110px) 0; }
+.guides-belief,.guides-vision,.guides-mission { min-height:clamp(470px,42vw,640px); padding:clamp(34px,4vw,65px); background:#000; color:#fff; display:flex; flex-direction:column; }
+.guides-belief .guides-index { position:static; color:var(--orange); font-size:clamp(92px,10vw,160px); line-height:.72; }
+.guides-belief h3 { margin-top:auto !important; color:#fff !important; font-size:clamp(38px,4vw,70px) !important; line-height:.85; }
+.guides-belief h3 span:first-child { color:#fff !important; }
+.guides-belief h3 span:last-child { color:var(--orange) !important; }
+.guides-belief h3 span { display:block; }
+.guides-belief>p { margin:clamp(32px,4vw,55px) 0 0 !important; color:#c7c7c7 !important; font-size:clamp(16px,1.25vw,20px) !important; line-height:1.45 !important; }
+.guides-values { padding-top:clamp(70px,8vw,130px); }
+.guides-values-head h3 i { display:none; }
+.guides-value-index { color:#000; font-size:clamp(86px,9vw,150px); }
+.guides-value h4,.guides-value p { color:#000 !important; }
+.pattern-break { height:70vh; min-height:560px; background:#fff; }
+.pattern-sticky { height:100%; min-height:560px; background:#fff; }
+.pattern-message { color:#000; mix-blend-mode:normal; font-size:clamp(62px,12vw,180px); }
+.pattern-secondary { margin:22px 0 0; font-size:.42em; font-weight:300; color:transparent; -webkit-text-stroke:1px rgba(0,0,0,.45); }
+.contact-link { border:0; background:transparent; color:#fff; text-align:left; padding:0; cursor:none; }
+.contact-identity { position:absolute; z-index:1; right:var(--page-gutter); top:19%; width:min(38vw,580px); height:auto; opacity:.9; }
+.contact-link,.contact-form,.contact footer,.contact>.eyebrow { position:relative; z-index:2; }
+.contact-form { position:absolute; z-index:5; top:8vh; right:var(--page-gutter); width:min(500px,calc(100% - var(--page-gutter) * 2)); padding:28px; background:#111; border:1px solid #555; display:grid; grid-template-columns:1fr 1fr; gap:20px; opacity:0; visibility:hidden; transform:translateY(20px); transition:.45s var(--ease); }
+.contact.is-form-open .contact-form { opacity:1; visibility:visible; transform:none; }
+.contact-form-head,.contact-form-message,.contact-form-status,.contact-form-submit { grid-column:1/-1; }
+.contact-form-head { display:flex; justify-content:space-between; color:var(--orange); font-size:10px; letter-spacing:.16em; }
+.contact-form-close { border:0; background:none; color:#fff; font-size:10px; letter-spacing:.12em; }
+.contact-form label { display:grid; gap:8px; color:#aaa; font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+.contact-form input,.contact-form textarea { width:100%; border:0; border-bottom:1px solid #666; border-radius:0; background:transparent; color:#fff; padding:8px 0; font:400 16px/1.3 'Inter Tight',sans-serif; outline:none; }
+.contact-form input:focus,.contact-form textarea:focus { border-color:var(--orange); }
+.contact-form-status { min-height:1em; margin:0; color:#aaa; font-size:13px; }
+.contact-form-submit { padding:15px 0; border:1px solid var(--orange); background:var(--orange); color:#000; font:600 12px 'Inter Tight',sans-serif; letter-spacing:.14em; }
+@media(max-width:700px){.contact-form{position:relative;top:auto;right:auto;margin:40px 0;grid-template-columns:1fr;}.contact{min-height:0;padding-bottom:80px;}.contact.is-form-open .contact-link{opacity:.2;}}
+@media(max-width:700px){ .hero-saudi-visual{width:100%;opacity:.5;mask-image:linear-gradient(#0005,#000);}.guides-beliefs{grid-template-columns:1fr;}.guides-belief{min-height:420px;}.pattern-break{height:64vh;min-height:480px;}.pattern-sticky{min-height:480px;}.contact-identity{position:relative;right:auto;top:auto;width:min(86vw,440px);margin:36px auto 0;} }

@@ -6,11 +6,11 @@ const motionData = window.motionGalleryData || [];
 if (motionGallery && motionData.length) {
   ["spotlight", "identity", "campaign", "editorial", "finale"].forEach(
     (bandName) => {
+      const bandItems = motionData.filter((item) => item.band === bandName);
+      if (!bandItems.length) return;
       const band = document.createElement("div");
       band.className = `motion-band motion-band--${bandName}`;
-    motionData
-        .filter((item) => item.band === bandName)
-        .forEach((item) => {
+      bandItems.forEach((item) => {
         const tile = document.createElement("button");
         const absoluteIndex = motionData.indexOf(item);
         tile.type = "button";
@@ -459,21 +459,20 @@ function layoutServiceOrbit() {
   const guideRect = orbitGuide.getBoundingClientRect();
   const centerX = guideRect.left - stageRect.left + guideRect.width / 2;
   const centerY = guideRect.top - stageRect.top + guideRect.height / 2;
-  const radiusX = guideRect.width / 2;
+  const safeInset = 28;
+  const widestNodeHalf = Math.max(...nodes.map((node) => node.offsetWidth * 0.56));
+  const radiusX = Math.min(
+    guideRect.width / 2,
+    stageRect.width / 2 - widestNodeHalf - safeInset,
+  );
   const radiusY = guideRect.height / 2;
-  nodes.forEach((node) => {
-    const radians = (Number(node.dataset.angle) * Math.PI) / 180;
-    const safeInset = 24;
-    // Keep wide-orbit labels inside the Full Field canvas, including active scale.
-    const halfNodeWidth = node.offsetWidth * 0.56;
-    const rawX = centerX + Math.cos(radians) * radiusX;
-    const x = Math.max(
-      halfNodeWidth + safeInset,
-      Math.min(stageRect.width - halfNodeWidth - safeInset, rawX),
-    );
+  nodes.forEach((node, index) => {
+    const angle = -90 + (index * 360) / nodes.length;
+    node.dataset.angle = String(angle);
+    const radians = (angle * Math.PI) / 180;
     node.style.setProperty(
       "--node-x",
-      `${x}px`,
+      `${centerX + Math.cos(radians) * radiusX}px`,
     );
     node.style.setProperty(
       "--node-y",
@@ -556,31 +555,6 @@ addEventListener(
 setActiveService(0, false);
 requestAnimationFrame(layoutServiceOrbit);
 
-const method = document.querySelector(".method");
-const methodScenes = [...document.querySelectorAll("[data-method-scene]")];
-const methodProgress = document.querySelector(".method-progress-current");
-function updateMethodJourney() {
-  if (!method || innerWidth <= 800 || reduced) return;
-  const rect = method.getBoundingClientRect();
-  const travel = Math.max(1, rect.height - innerHeight);
-  const progress = Math.max(0, Math.min(1, -rect.top / travel));
-  let active = 0;
-  methodScenes.forEach((scene, index) => {
-    const center = index / (methodScenes.length - 1);
-    const drift = Math.max(-1, Math.min(1, (progress - center) * 4));
-    const visibility = Math.pow(Math.max(0, 1 - Math.abs(drift)), 2.4);
-    scene.style.setProperty("--scene-visibility", visibility.toFixed(3));
-    scene.style.setProperty("--scene-drift", drift.toFixed(3));
-    if (visibility > 0.52) active = index;
-  });
-  method.dataset.activeStage = active;
-  if (methodProgress)
-    methodProgress.textContent = String(active + 1).padStart(2, "0");
-}
-addEventListener("scroll", updateMethodJourney, { passive: true });
-addEventListener("resize", updateMethodJourney);
-updateMethodJourney();
-
 const patternBreak = document.querySelector(".pattern-break");
 const patternRevealObserver = new IntersectionObserver(
   ([entry]) => patternBreak?.classList.toggle("is-visible", entry.isIntersecting),
@@ -588,88 +562,33 @@ const patternRevealObserver = new IntersectionObserver(
 );
 if (patternBreak) patternRevealObserver.observe(patternBreak);
 
-const patternEase = (start, end, value) => {
-  const t = Math.max(0, Math.min(1, (value - start) / (end - start)));
-  return t * t * (3 - 2 * t);
-};
-
-function updatePatternTakeover() {
-  if (!patternBreak || reduced) return;
-  const rect = patternBreak.getBoundingClientRect();
-  const travel = Math.max(1, rect.height - innerHeight);
-  const progress = Math.max(0, Math.min(1, -rect.top / travel));
-  const takeover = patternEase(0.16, 0.66, progress);
-  const deep = patternEase(0.24, 0.54, progress);
-  const release = patternEase(0.84, 1, progress);
-  const bandInsetY = 37 * (1 - takeover);
-  const shift = -2 + progress * (innerWidth <= 800 ? 5 : 7);
-
-  patternBreak.style.setProperty("--takeover", takeover.toFixed(3));
-  patternBreak.style.setProperty("--deep", deep.toFixed(3));
-  patternBreak.style.setProperty("--release", release.toFixed(3));
-  patternBreak.style.setProperty("--band-inset-y", `${bandInsetY.toFixed(2)}%`);
-  patternBreak.style.setProperty("--pattern-shift", `${shift.toFixed(2)}vw`);
-}
-
-addEventListener("scroll", updatePatternTakeover, { passive: true });
-addEventListener("resize", updatePatternTakeover);
-updatePatternTakeover();
-
 const contact = document.querySelector(".contact");
-const contactEye = document.querySelector(".contact-eye");
-const contactPupil = contactEye?.querySelector("i");
-if (contact && contactEye && contactPupil && !touch && !reduced) {
-  let targetX = 0,
-    targetY = 0,
-    lookX = 0,
-    lookY = 0,
-    contactTicking = false;
-  const drawContactLook = () => {
-    lookX += (targetX - lookX) * 0.14;
-    lookY += (targetY - lookY) * 0.14;
-    contactPupil.style.left = "50%";
-    contactPupil.style.top = "50%";
-    contactPupil.style.transform = `translate(-50%,-50%) translate(${lookX.toFixed(2)}px,${lookY.toFixed(2)}px)`;
-    if (Math.abs(targetX - lookX) + Math.abs(targetY - lookY) > 0.08)
-      requestAnimationFrame(drawContactLook);
-    else contactTicking = false;
-  };
-  const setContactLook = (x, y) => {
-    const r = contactEye.getBoundingClientRect();
-    targetX =
-      Math.max(-1, Math.min(1, (x - (r.left + r.width / 2)) / (r.width / 2))) *
-      13;
-    targetY =
-      Math.max(-1, Math.min(1, (y - (r.top + r.height / 2)) / (r.height / 2))) *
-      7;
-    if (!contactTicking) {
-      contactTicking = true;
-      requestAnimationFrame(drawContactLook);
-    }
-  };
-  contact.addEventListener(
-    "pointermove",
-    (event) => setContactLook(event.clientX, event.clientY),
-    { passive: true },
-  );
-  contact.addEventListener("pointerleave", () => {
-    targetX = 0;
-    targetY = 0;
-    if (!contactTicking) {
-      contactTicking = true;
-      requestAnimationFrame(drawContactLook);
-    }
-  });
-}
-
-document.querySelectorAll(".cap-list details").forEach((detail) =>
-  detail.addEventListener("toggle", () => {
-    if (detail.open)
-      document.querySelectorAll(".cap-list details").forEach((other) => {
-        if (other !== detail) other.open = false;
-      });
-  }),
-);
+const contactLink = document.querySelector(".contact-link");
+const contactForm = document.querySelector(".contact-form");
+const contactFormClose = document.querySelector(".contact-form-close");
+const contactFormStatus = document.querySelector(".contact-form-status");
+const toggleContactForm = (open) => {
+  if (!contact || !contactLink) return;
+  contact.classList.toggle("is-form-open", open);
+  contactLink.setAttribute("aria-expanded", String(open));
+  if (open)
+    requestAnimationFrame(() => contactForm?.querySelector("input")?.focus());
+  else contactLink.focus();
+};
+contactLink?.addEventListener("click", () => toggleContactForm(true));
+contactFormClose?.addEventListener("click", () => toggleContactForm(false));
+addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && contact?.classList.contains("is-form-open"))
+    toggleContactForm(false);
+});
+contactForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!contactForm.checkValidity()) {
+    contactForm.reportValidity();
+    return;
+  }
+  contactFormStatus.textContent = "Form ready. Connect this form to your approved lead endpoint to send enquiries.";
+});
 
 const menu = document.querySelector(".menu");
 menu.addEventListener("click", () => {
