@@ -74,6 +74,100 @@ if (!aboutTouch) {
   });
 }
 
+const pointOfView = document.querySelector(".about-view");
+const pointOfViewScene = document.querySelector(".about-view-scene");
+let pointOfViewTicking = false;
+
+const updatePointOfView = () => {
+  pointOfViewTicking = false;
+  if (!pointOfView || !pointOfViewScene || aboutReducedMotion || innerWidth <= 800) return;
+  const rect = pointOfView.getBoundingClientRect();
+  const travel = Math.max(1, rect.height - innerHeight);
+  const progress = Math.max(0, Math.min(1, -rect.top / travel));
+  const aligned = 1 - Math.pow(1 - progress, 2.4);
+  const introExit = Math.max(0, Math.min(1, (progress - 0.28) / 0.3));
+  const resolution = Math.max(0, Math.min(1, (progress - 0.52) / 0.3));
+
+  pointOfViewScene.style.setProperty("--pov-progress", progress.toFixed(3));
+  pointOfViewScene.style.setProperty("--pov-spread", `${(27 * (1 - aligned)).toFixed(2)}vw`);
+  pointOfViewScene.style.setProperty("--pov-lift", `${(12 * (1 - aligned)).toFixed(2)}vh`);
+  pointOfViewScene.style.setProperty("--pov-angle", `${(7 * (1 - aligned)).toFixed(2)}deg`);
+  pointOfViewScene.style.setProperty("--pov-angle-left", `${(-7 * (1 - aligned)).toFixed(2)}deg`);
+  pointOfViewScene.style.setProperty("--pov-image-shift", `${(progress * 8).toFixed(2)}%`);
+  pointOfViewScene.style.setProperty("--pov-pupil-x", `${(23 * (1 - aligned)).toFixed(2)}vw`);
+  pointOfViewScene.style.setProperty("--pov-pupil-y", `${(-9 * (1 - aligned)).toFixed(2)}vh`);
+  pointOfViewScene.style.setProperty("--pov-intro-opacity", (1 - introExit).toFixed(3));
+  pointOfViewScene.style.setProperty("--pov-intro-y", `${(-32 * introExit).toFixed(1)}px`);
+  pointOfViewScene.style.setProperty("--pov-resolution-opacity", resolution.toFixed(3));
+  pointOfViewScene.style.setProperty("--pov-resolution-y", `${(30 * (1 - resolution)).toFixed(1)}px`);
+};
+
+const requestPointOfViewUpdate = () => {
+  if (pointOfViewTicking) return;
+  pointOfViewTicking = true;
+  requestAnimationFrame(updatePointOfView);
+};
+
+const socialSection = document.querySelector(".about-social");
+const socialSystem = document.querySelector(".social-system");
+const socialRows = [...document.querySelectorAll(".social-row")];
+let socialScrollIndex = 0;
+let socialHoverIndex = null;
+let socialTicking = false;
+
+const setSocialState = (index) => {
+  if (!socialRows.length || !socialSystem) return;
+  const safeIndex = Math.max(0, Math.min(socialRows.length - 1, index));
+  socialRows.forEach((row, rowIndex) => row.classList.toggle("is-active", rowIndex === safeIndex));
+  const activeRow = socialRows[safeIndex];
+  const systemRect = socialSystem.getBoundingClientRect();
+  const activeRect = activeRow.getBoundingClientRect();
+  socialSystem.style.setProperty("--social-pupil-y", `${activeRect.top - systemRect.top + activeRect.height / 2}px`);
+};
+
+const updateSocialState = () => {
+  socialTicking = false;
+  if (!socialSection || !socialRows.length) return;
+  const focusLine = innerHeight * 0.34;
+  let nearestIndex = 0;
+  let nearestDistance = Infinity;
+  socialRows.forEach((row, index) => {
+    const rect = row.getBoundingClientRect();
+    const distance = Math.abs(rect.top + rect.height / 2 - focusLine);
+    if (distance < nearestDistance) {
+      nearestDistance = distance;
+      nearestIndex = index;
+    }
+  });
+  socialScrollIndex = nearestIndex;
+  setSocialState(socialHoverIndex ?? socialScrollIndex);
+};
+
+const requestSocialUpdate = () => {
+  if (socialTicking) return;
+  socialTicking = true;
+  requestAnimationFrame(updateSocialState);
+};
+
+socialRows.forEach((row, index) => {
+  row.addEventListener("mouseenter", () => {
+    socialHoverIndex = index;
+    setSocialState(index);
+  });
+  row.addEventListener("mouseleave", () => {
+    socialHoverIndex = null;
+    setSocialState(socialScrollIndex);
+  });
+  row.addEventListener("focus", () => {
+    socialHoverIndex = index;
+    setSocialState(index);
+  });
+  row.addEventListener("blur", () => {
+    socialHoverIndex = null;
+    setSocialState(socialScrollIndex);
+  });
+});
+
 const convergence = document.querySelector(".about-convergence");
 const convergenceScene = document.querySelector(".about-convergence-scene");
 let convergenceTicking = false;
@@ -102,5 +196,13 @@ const requestConvergenceUpdate = () => {
   requestAnimationFrame(updateConvergence);
 };
 addEventListener("scroll", requestConvergenceUpdate, { passive: true });
-addEventListener("resize", requestConvergenceUpdate);
+addEventListener("scroll", requestPointOfViewUpdate, { passive: true });
+addEventListener("scroll", requestSocialUpdate, { passive: true });
+addEventListener("resize", () => {
+  requestConvergenceUpdate();
+  requestPointOfViewUpdate();
+  requestSocialUpdate();
+});
 requestConvergenceUpdate();
+requestPointOfViewUpdate();
+requestSocialUpdate();
