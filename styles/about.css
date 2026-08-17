@@ -1321,7 +1321,7 @@ body.location-map-open { overflow: hidden; }
   }
   .about-hero-line--outline,
   .about-hero-line--offset { margin-left: 0; }
-  .about-hero-identity { width: 82vw; right: -31vw; top: 60%; opacity: .7; }
+  .about-hero-identity { width: 82vw; right: 0vw; top: 60%; opacity: .3; }
   .about-hero-note { grid-column: 1 / 10; font-size: 15px; z-index: 2; }
   .about-scroll { grid-column: 10 / 13; font-size: 0; gap: 0; }
   .about-scroll span { font-size: 25px; }
