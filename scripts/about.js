@@ -215,7 +215,226 @@ socialRows.forEach((row, index) => {
 });
 
 const locationSection = document.querySelector(".about-contact");
+const locationMapTrigger = document.querySelector(".about-location-system");
+const locationMapDialog = document.querySelector(".location-map-dialog");
+const locationMapPanel = document.querySelector(".location-map-panel");
+const expandedMapArt = document.querySelector(".expanded-map-art");
+const locationMapClose = document.querySelector(".location-map-close");
+const locationLeafletHost = document.querySelector("#location-leaflet-map");
 let locationTicking = false;
+let locationMapAnimating = false;
+let locationMapLastFocus = null;
+let locationLeafletMap = null;
+let locationLeafletMarker = null;
+let locationTileLayer = null;
+let locationTilesReady = false;
+let locationMapLoadTimer = null;
+
+// TEMPORARY LOCATION — replace with approved Double Eyes office coordinates
+const temporaryDoubleEyesLocation = [24.7136, 46.6753];
+const temporaryRiyadhContext = [24.7136, 46.6753];
+
+// Keep the fixed map dialog outside section stacking contexts so it remains fully interactive above the global navigation.
+if (locationMapDialog && locationMapDialog.parentElement !== document.body) document.body.appendChild(locationMapDialog);
+
+if (expandedMapArt) {
+  const sourceMap = document.querySelector(".city-map-window");
+  const expandedMap = sourceMap?.cloneNode(true);
+  expandedMap?.removeAttribute("clip-path");
+  if (expandedMap) expandedMapArt.append(expandedMap);
+}
+
+const setLocationMapReady = () => {
+  if (!locationMapDialog || locationMapDialog.hidden) return;
+  locationTilesReady = true;
+  clearTimeout(locationMapLoadTimer);
+  locationMapDialog.classList.remove("is-map-loading", "is-map-fallback");
+  locationMapDialog.classList.add("is-map-ready");
+};
+
+const setLocationMapFallback = () => {
+  if (!locationMapDialog || locationMapDialog.hidden || locationTilesReady) return;
+  locationMapDialog.classList.remove("is-map-loading", "is-map-ready");
+  locationMapDialog.classList.add("is-map-fallback");
+};
+
+const initializeLocationLeafletMap = () => {
+  if (locationLeafletMap || !locationLeafletHost || !window.L) return locationLeafletMap;
+
+  locationLeafletMap = L.map(locationLeafletHost, {
+    zoomControl: false,
+    attributionControl: true,
+    minZoom: 5,
+    maxZoom: 19,
+    scrollWheelZoom: true,
+    dragging: true,
+    touchZoom: true,
+    doubleClickZoom: true,
+    keyboard: true,
+  }).setView(temporaryRiyadhContext, 12);
+
+  locationTileLayer = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    subdomains: "abcd",
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>',
+  }).addTo(locationLeafletMap);
+
+  const markerIcon = L.divIcon({
+    className: "double-eyes-map-marker-shell",
+    html: '<span class="double-eyes-map-marker"><i></i></span>',
+    iconSize: [62, 62],
+    iconAnchor: [31, 31],
+    popupAnchor: [0, -34],
+  });
+
+  locationLeafletMarker = L.marker(temporaryDoubleEyesLocation, {
+    icon: markerIcon,
+    title: "Approximate Double Eyes location in Olaya District",
+    keyboard: true,
+  }).addTo(locationLeafletMap);
+  locationLeafletMarker.bindPopup(
+    '<div class="double-eyes-map-popup"><small>Double Eyes</small><strong>Olaya District</strong><span>Riyadh, Saudi Arabia</span><em>Temporary location</em><a href="/?contact=open#contact">Write to us ↗</a></div>',
+    { className: "double-eyes-leaflet-popup", closeButton: true, offset: [0, -4], maxWidth: 280 },
+  );
+
+  return locationLeafletMap;
+};
+
+const focusDoubleEyesLocation = (animate = true) => {
+  if (!locationLeafletMap) return;
+  locationLeafletMap.closePopup();
+  if (animate && !aboutReducedMotion) {
+    locationLeafletMap.setView(temporaryRiyadhContext, 12, { animate: false });
+    setTimeout(() => locationLeafletMap?.flyTo(temporaryDoubleEyesLocation, 15, { duration: .8 }), 90);
+  } else {
+    locationLeafletMap.setView(temporaryDoubleEyesLocation, 15, { animate: false });
+  }
+};
+
+const activateInteractiveLocationMap = () => {
+  if (!locationMapDialog) return;
+  locationMapDialog.classList.remove("is-map-ready", "is-map-fallback");
+  locationMapDialog.classList.add("is-map-loading");
+  locationTilesReady = false;
+  const map = initializeLocationLeafletMap();
+  if (!map) {
+    setLocationMapFallback();
+    return;
+  }
+  requestAnimationFrame(() => {
+    map.invalidateSize({ pan: false });
+    locationTileLayer?.once("load", setLocationMapReady);
+    focusDoubleEyesLocation(true);
+    if (locationTileLayer && !locationTileLayer.isLoading()) {
+      setTimeout(setLocationMapReady, aboutReducedMotion ? 0 : 260);
+    }
+  });
+  clearTimeout(locationMapLoadTimer);
+  locationMapLoadTimer = setTimeout(setLocationMapFallback, 7000);
+};
+
+const getLocationMapTransform = (sourceRect, destinationRect) => ({
+  transform: `translate(${sourceRect.left - destinationRect.left}px, ${sourceRect.top - destinationRect.top}px) scale(${sourceRect.width / destinationRect.width}, ${sourceRect.height / destinationRect.height})`,
+  borderRadius: "48% / 46%",
+});
+
+const getLocationDialogFocusables = () => [...(locationMapDialog?.querySelectorAll(
+  'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+) || [])].filter((element) => !element.hasAttribute("hidden"));
+
+const openLocationMap = async () => {
+  if (!locationMapTrigger || !locationMapDialog || !locationMapPanel || locationMapAnimating || !locationMapDialog.hidden) return;
+  locationMapAnimating = true;
+  locationMapLastFocus = document.activeElement;
+  const sourceRect = locationMapTrigger.getBoundingClientRect();
+
+  locationMapDialog.hidden = false;
+  locationMapDialog.classList.add("is-opening");
+  locationMapTrigger.setAttribute("aria-expanded", "true");
+  document.documentElement.classList.add("location-map-open");
+  document.body.classList.add("location-map-open");
+
+  await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  const destinationRect = locationMapPanel.getBoundingClientRect();
+  const duration = aboutReducedMotion ? 120 : 720;
+  const animation = locationMapPanel.animate(
+    [
+      getLocationMapTransform(sourceRect, destinationRect),
+      { transform: "translate(0, 0) scale(1)", borderRadius: getComputedStyle(locationMapPanel).borderRadius },
+    ],
+    { duration, easing: "cubic-bezier(.16, 1, .3, 1)", fill: "both" },
+  );
+
+  await animation.finished.catch(() => {});
+  animation.cancel();
+  locationMapDialog.classList.remove("is-opening");
+  locationMapDialog.classList.add("is-open");
+  activateInteractiveLocationMap();
+  locationMapAnimating = false;
+  locationMapClose?.focus({ preventScroll: true });
+};
+
+const closeLocationMap = async () => {
+  if (!locationMapTrigger || !locationMapDialog || !locationMapPanel || locationMapAnimating || locationMapDialog.hidden) return;
+  locationMapAnimating = true;
+  locationMapDialog.classList.remove("is-open");
+  locationMapDialog.classList.remove("is-map-ready", "is-map-loading", "is-map-fallback");
+  locationMapDialog.classList.add("is-closing");
+  const destinationRect = locationMapPanel.getBoundingClientRect();
+  const sourceRect = locationMapTrigger.getBoundingClientRect();
+  const duration = aboutReducedMotion ? 100 : 620;
+  const animation = locationMapPanel.animate(
+    [
+      { transform: "translate(0, 0) scale(1)", borderRadius: getComputedStyle(locationMapPanel).borderRadius },
+      getLocationMapTransform(sourceRect, destinationRect),
+    ],
+    { duration, easing: "cubic-bezier(.7, 0, .2, 1)", fill: "both" },
+  );
+
+  await animation.finished.catch(() => {});
+  animation.cancel();
+  locationMapDialog.classList.remove("is-closing");
+  locationMapDialog.hidden = true;
+  locationMapTrigger.setAttribute("aria-expanded", "false");
+  document.documentElement.classList.remove("location-map-open");
+  document.body.classList.remove("location-map-open");
+  locationMapAnimating = false;
+  (locationMapLastFocus instanceof HTMLElement ? locationMapLastFocus : locationMapTrigger).focus({ preventScroll: true });
+};
+
+locationMapTrigger?.setAttribute("aria-expanded", "false");
+locationMapTrigger?.addEventListener("click", openLocationMap);
+locationMapDialog?.querySelectorAll("[data-location-close]").forEach((control) => control.addEventListener("click", closeLocationMap));
+locationMapDialog?.querySelector('[data-map-zoom="in"]')?.addEventListener("click", () => locationLeafletMap?.zoomIn());
+locationMapDialog?.querySelector('[data-map-zoom="out"]')?.addEventListener("click", () => locationLeafletMap?.zoomOut());
+locationMapDialog?.querySelector("[data-map-recenter]")?.addEventListener("click", () => focusDoubleEyesLocation(true));
+locationLeafletHost?.addEventListener("mouseenter", () => {
+  const cursor = document.querySelector(".cursor");
+  if (cursor) cursor.style.opacity = "0";
+});
+locationLeafletHost?.addEventListener("mouseleave", () => {
+  const cursor = document.querySelector(".cursor");
+  if (cursor) cursor.style.opacity = "";
+});
+locationMapDialog?.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    event.preventDefault();
+    closeLocationMap();
+    return;
+  }
+  if (event.key !== "Tab") return;
+  const focusables = getLocationDialogFocusables();
+  if (!focusables.length) return;
+  const first = focusables[0];
+  const last = focusables[focusables.length - 1];
+  if (event.shiftKey && document.activeElement === first) {
+    event.preventDefault();
+    last.focus();
+  } else if (!event.shiftKey && document.activeElement === last) {
+    event.preventDefault();
+    first.focus();
+  }
+});
 
 if (locationSection) {
   if (aboutReducedMotion) {
