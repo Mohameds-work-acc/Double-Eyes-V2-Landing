@@ -465,3 +465,56 @@
     align-self: end;
   }
 }
+
+/* Homepage contact footer — mirrors the contact page's editorial footer grid,
+   including its intentional two-column mobile composition. */
+.contact footer.about-footer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr auto;
+  gap: clamp(26px, 4vw, 70px);
+  align-items: end;
+  padding-block: clamp(42px, 5vw, 76px);
+  border-top: 1px solid #333;
+  font-size: 12px;
+}
+.contact footer.about-footer > * {
+  grid-column: auto;
+  grid-row: auto;
+  justify-self: auto;
+}
+.contact footer.about-footer nav,
+.contact footer.about-footer .about-footer-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.contact footer.about-footer a {
+  transition: color 0.25s;
+}
+.contact footer.about-footer a:hover {
+  color: var(--orange);
+}
+.contact footer.about-footer small {
+  color: #777;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .contact footer.about-footer {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(24px, 7vw, 34px);
+  }
+  .contact footer.about-footer > .footer-logo {
+    grid-column: 1 / -1;
+    margin-bottom: 32px;
+  }
+  .contact footer.about-footer > .about-footer-socials {
+    align-items: flex-end;
+    text-align: right;
+  }
+  .contact footer.about-footer > small {
+    grid-column: 1 / -1;
+    justify-self: auto;
+    margin-top: 28px;
+  }
+}
