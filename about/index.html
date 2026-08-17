@@ -19,7 +19,7 @@
     />
     <link rel="stylesheet" href="../styles/style.css?v=audit-2" />
     <link rel="stylesheet" href="../styles/brand-logo.css" />
-    <link rel="stylesheet" href="../styles/about.css?v=about-5" />
+    <link rel="stylesheet" href="../styles/about.css?v=about-6" />
   </head>
   <body class="about-page">
     <a class="skip" href="#about-main">Skip to content</a>
@@ -183,24 +183,41 @@
                   <path pathLength="1" d="M116 542V382L278 220V24" />
                   <path pathLength="1" d="M872 26V168L742 298V548" />
                 </g>
-                <!-- TEMPORARY ABSTRACT MAP — replace/refine when the approved office location is supplied. -->
+                <!-- TEMPORARY BRANDED MAP — marker is illustrative until the approved office location is supplied. -->
                 <g class="city-map-window" clip-path="url(#location-map-clip)">
                   <path class="map-surface" d="M350 120H970V410H350Z" />
+                  <g class="map-districts">
+                    <path d="M365 128H507L494 220H365Z" /><path d="M512 128H641L635 220H499Z" />
+                    <path d="M646 128H765L757 220H640Z" /><path d="M770 128H958V220H763Z" />
+                    <path d="M365 278H492L484 402H365Z" /><path d="M498 278H634L628 402H489Z" />
+                    <path d="M642 278H764L756 402H634Z" /><path d="M771 278H958V402H763Z" />
+                  </g>
                   <g class="map-blocks">
-                    <path d="M430 168h94v48h-94zM555 157h74v70h-74zM662 174h102v43H662zM792 160h104v66H792z" />
-                    <path d="M404 302h82v48h-82zM522 290h111v68H522zM675 309h69v45h-69zM778 286h126v70H778z" />
+                    <path d="M382 145h43v28h-43zM434 142h53v33h-53zM518 144h45v30h-45zM573 140h46v36h-46zM666 144h62v31h-62zM778 141h48v34h-48zM837 146h83v28h-83z" />
+                    <path d="M378 186h56v25h-56zM444 184h42v29h-42zM516 185h47v27h-47zM574 188h46v24h-46zM665 185h37v28h-37zM711 186h45v26h-45zM777 185h63v29h-63zM850 184h72v28h-72z" />
+                    <path d="M379 298h51v34h-51zM440 300h42v31h-42zM510 298h52v32h-52zM573 296h47v36h-47zM660 298h42v32h-42zM711 300h45v30h-45zM779 297h58v35h-58zM848 299h73v31h-73z" />
+                    <path d="M381 344h44v39h-44zM435 342h49v42h-49zM511 345h51v38h-51zM574 343h46v41h-46zM661 344h42v39h-42zM712 342h44v42h-44zM780 344h59v39h-59zM850 342h72v42h-72z" />
                   </g>
-                  <g class="map-roads-secondary">
-                    <path pathLength="1" d="M388 188H930M392 332H925M474 138V392M608 132V397M735 135V395M860 130V397" />
-                    <path pathLength="1" d="M365 250H518L576 192H948M372 374L535 211M704 395L918 180" />
+                  <g class="map-roads-minor">
+                    <path pathLength="1" d="M365 181H958M365 218H958M365 294H958M365 338H958M365 388H958" />
+                    <path pathLength="1" d="M430 128V402M491 128V402M565 128V402M631 128V402M706 128V402M764 128V402M843 128V402" />
+                    <path pathLength="1" d="M365 365L491 239M730 402L958 174" />
                   </g>
-                  <g class="map-roads-primary">
-                    <path pathLength="1" d="M347 270H958" />
-                    <path pathLength="1" d="M647 116V415" />
-                    <path pathLength="1" d="M390 390L527 253L949 253" />
+                  <g class="map-road-casings">
+                    <path pathLength="1" d="M350 251C510 244 702 249 970 232" />
+                    <path pathLength="1" d="M646 112C638 179 642 242 633 314C628 353 629 388 632 417" />
+                    <path pathLength="1" d="M372 397C462 318 560 286 680 261C794 237 882 193 965 141" />
                   </g>
-                  <text class="map-label map-label--olaya" x="682" y="232">OLAYA</text>
-                  <text class="map-label map-label--riyadh" x="430" y="289">RIYADH</text>
+                  <g class="map-roads-major">
+                    <path pathLength="1" d="M350 251C510 244 702 249 970 232" />
+                    <path pathLength="1" d="M646 112C638 179 642 242 633 314C628 353 629 388 632 417" />
+                    <path pathLength="1" d="M372 397C462 318 560 286 680 261C794 237 882 193 965 141" />
+                  </g>
+                  <path class="map-focus-path" pathLength="1" d="M635 366C672 326 721 292 790 265" />
+                  <circle class="map-secondary-marker" cx="540" cy="250" r="5" />
+                  <text class="map-label map-label--riyadh" x="392" y="275">RIYADH</text>
+                  <text class="map-label map-label--olaya" x="760" y="292">OLAYA</text>
+                  <text class="map-label map-label--road" x="653" y="360" transform="rotate(-88 653 360)">KING FAHD RD</text>
                 </g>
                 <path class="city-capsule" pathLength="1" d="M492 128H827c88 0 137 55 137 137s-49 137-137 137H492c-88 0-137-55-137-137s49-137 137-137Z" />
                 <path class="city-corridor" pathLength="1" d="M436 265H842" />

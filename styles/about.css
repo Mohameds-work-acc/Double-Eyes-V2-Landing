@@ -558,12 +558,22 @@
   transition: stroke-dashoffset 1.3s var(--ease) .38s;
 }
 .city-map-window .map-surface {
-  fill: rgba(255,255,255,.018);
+  fill: #dededb;
   stroke: none;
   stroke-dasharray: none;
+  opacity: 0;
+  transition: opacity .7s ease .42s;
+}
+.map-districts path {
+  fill: #d2d2ce;
+  stroke: rgba(35,35,32,.08);
+  stroke-width: .65;
+  stroke-dasharray: none;
+  opacity: 0;
+  transition: opacity .7s ease .56s;
 }
 .map-blocks path {
-  fill: rgba(255,255,255,.035);
+  fill: #c2c2bd;
   stroke: none;
   stroke-dasharray: none;
   opacity: 0;
@@ -571,29 +581,54 @@
   transform-origin: center;
   transition: opacity .7s ease .62s, transform .9s var(--ease) .62s;
 }
-.map-roads-secondary path {
-  stroke: rgba(255,255,255,.075);
-  stroke-width: .85;
+.map-roads-minor path {
+  stroke: rgba(30,30,28,.24);
+  stroke-width: .8;
   transition: stroke-dashoffset 1.15s var(--ease) .55s;
 }
-.map-roads-primary path {
-  stroke: rgba(255,255,255,.18);
-  stroke-width: 1.45;
+.map-road-casings path {
+  stroke: rgba(61,61,57,.42);
+  stroke-width: 10;
+  transition: stroke-dashoffset 1.2s var(--ease) .6s;
+}
+.map-roads-major path {
+  stroke: #f5f5f1;
+  stroke-width: 5.5;
   transition: stroke-dashoffset 1.2s var(--ease) .68s;
 }
+.map-focus-path {
+  stroke: var(--orange);
+  stroke-width: 2.4;
+  transition: stroke-dashoffset 1.05s var(--ease) .78s;
+}
+.map-secondary-marker {
+  fill: #575751;
+  stroke: #f5f5f1;
+  stroke-width: 2;
+  opacity: 0;
+  transform: scale(.3);
+  transform-origin: 540px 250px;
+  transition: opacity .45s ease .88s, transform .65s var(--ease) .88s;
+}
 .map-label {
-  fill: rgba(255,255,255,.42);
+  fill: #43433f;
   font-family: "Inter Tight", sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: .18em;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: .16em;
   opacity: 0;
   transform: translateY(7px);
   transition: opacity .5s ease .95s, transform .65s var(--ease) .95s;
 }
 .map-label--riyadh {
-  fill: rgba(255,255,255,.19);
-  font-size: 8px;
+  fill: #6e6e68;
+  font-size: 9px;
+}
+.map-label--road {
+  fill: #777771;
+  font-size: 7px;
+  font-weight: 550;
+  letter-spacing: .12em;
 }
 .city-capsule {
   stroke: rgba(255,255,255,.28);
@@ -776,9 +811,15 @@
   transform: none;
 }
 .about-contact.is-location-visible .location-city path { stroke-dashoffset: 0; }
+.about-contact.is-location-visible .map-surface,
+.about-contact.is-location-visible .map-districts path { opacity: 1; }
 .about-contact.is-location-visible .map-blocks path {
   opacity: 1;
   transform: none;
+}
+.about-contact.is-location-visible .map-secondary-marker {
+  opacity: 1;
+  transform: scale(1);
 }
 .about-contact.is-location-visible .map-label {
   opacity: 1;
@@ -927,9 +968,14 @@
   }
   .city-secondary { display: none; }
   .city-primary path { stroke: rgba(255,255,255,.1); }
-  .map-blocks { display: none; }
-  .map-roads-secondary { opacity: .62; }
+  .map-districts { opacity: .72; }
+  .map-blocks { opacity: .7; }
+  .map-roads-minor { opacity: .7; }
+  .map-road-casings path { stroke-width: 7; }
+  .map-roads-major path { stroke-width: 4; }
   .map-label--riyadh { display: none; }
+  .map-label--road { display: none; }
+  .map-secondary-marker { display: none; }
   .city-capsule { stroke-width: 18px; }
   .location-pupil {
     left: 79%;
