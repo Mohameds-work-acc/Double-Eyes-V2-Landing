@@ -19,7 +19,7 @@
     />
     <link rel="stylesheet" href="../styles/style.css?v=audit-2" />
     <link rel="stylesheet" href="../styles/brand-logo.css" />
-    <link rel="stylesheet" href="../styles/about.css?v=about-4" />
+    <link rel="stylesheet" href="../styles/about.css?v=about-5" />
   </head>
   <body class="about-page">
     <a class="skip" href="#about-main">Skip to content</a>
@@ -165,6 +165,11 @@
 
             <div class="about-location-system" aria-hidden="true">
               <svg class="location-city" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <clipPath id="location-map-clip">
+                    <path d="M492 147H827c76 0 118 47 118 118s-42 118-118 118H492c-76 0-118-47-118-118s42-118 118-118Z" />
+                  </clipPath>
+                </defs>
                 <g class="city-secondary">
                   <path pathLength="1" d="M40 92H336L455 205H940" />
                   <path pathLength="1" d="M84 474H328L510 302H955" />
@@ -177,6 +182,25 @@
                   <path pathLength="1" d="M22 210H282L410 338H972" />
                   <path pathLength="1" d="M116 542V382L278 220V24" />
                   <path pathLength="1" d="M872 26V168L742 298V548" />
+                </g>
+                <!-- TEMPORARY ABSTRACT MAP — replace/refine when the approved office location is supplied. -->
+                <g class="city-map-window" clip-path="url(#location-map-clip)">
+                  <path class="map-surface" d="M350 120H970V410H350Z" />
+                  <g class="map-blocks">
+                    <path d="M430 168h94v48h-94zM555 157h74v70h-74zM662 174h102v43H662zM792 160h104v66H792z" />
+                    <path d="M404 302h82v48h-82zM522 290h111v68H522zM675 309h69v45h-69zM778 286h126v70H778z" />
+                  </g>
+                  <g class="map-roads-secondary">
+                    <path pathLength="1" d="M388 188H930M392 332H925M474 138V392M608 132V397M735 135V395M860 130V397" />
+                    <path pathLength="1" d="M365 250H518L576 192H948M372 374L535 211M704 395L918 180" />
+                  </g>
+                  <g class="map-roads-primary">
+                    <path pathLength="1" d="M347 270H958" />
+                    <path pathLength="1" d="M647 116V415" />
+                    <path pathLength="1" d="M390 390L527 253L949 253" />
+                  </g>
+                  <text class="map-label map-label--olaya" x="682" y="232">OLAYA</text>
+                  <text class="map-label map-label--riyadh" x="430" y="289">RIYADH</text>
                 </g>
                 <path class="city-capsule" pathLength="1" d="M492 128H827c88 0 137 55 137 137s-49 137-137 137H492c-88 0-137-55-137-137s49-137 137-137Z" />
                 <path class="city-corridor" pathLength="1" d="M436 265H842" />

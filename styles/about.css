@@ -557,6 +557,44 @@
   stroke-width: 1.2;
   transition: stroke-dashoffset 1.3s var(--ease) .38s;
 }
+.city-map-window .map-surface {
+  fill: rgba(255,255,255,.018);
+  stroke: none;
+  stroke-dasharray: none;
+}
+.map-blocks path {
+  fill: rgba(255,255,255,.035);
+  stroke: none;
+  stroke-dasharray: none;
+  opacity: 0;
+  transform: scale(.97);
+  transform-origin: center;
+  transition: opacity .7s ease .62s, transform .9s var(--ease) .62s;
+}
+.map-roads-secondary path {
+  stroke: rgba(255,255,255,.075);
+  stroke-width: .85;
+  transition: stroke-dashoffset 1.15s var(--ease) .55s;
+}
+.map-roads-primary path {
+  stroke: rgba(255,255,255,.18);
+  stroke-width: 1.45;
+  transition: stroke-dashoffset 1.2s var(--ease) .68s;
+}
+.map-label {
+  fill: rgba(255,255,255,.42);
+  font-family: "Inter Tight", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  opacity: 0;
+  transform: translateY(7px);
+  transition: opacity .5s ease .95s, transform .65s var(--ease) .95s;
+}
+.map-label--riyadh {
+  fill: rgba(255,255,255,.19);
+  font-size: 8px;
+}
 .city-capsule {
   stroke: rgba(255,255,255,.28);
   stroke-width: clamp(18px, 2.3vw, 42px);
@@ -738,6 +776,14 @@
   transform: none;
 }
 .about-contact.is-location-visible .location-city path { stroke-dashoffset: 0; }
+.about-contact.is-location-visible .map-blocks path {
+  opacity: 1;
+  transform: none;
+}
+.about-contact.is-location-visible .map-label {
+  opacity: 1;
+  transform: none;
+}
 .about-contact.is-location-visible .location-pupil {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
@@ -881,6 +927,9 @@
   }
   .city-secondary { display: none; }
   .city-primary path { stroke: rgba(255,255,255,.1); }
+  .map-blocks { display: none; }
+  .map-roads-secondary { opacity: .62; }
+  .map-label--riyadh { display: none; }
   .city-capsule { stroke-width: 18px; }
   .location-pupil {
     left: 79%;
