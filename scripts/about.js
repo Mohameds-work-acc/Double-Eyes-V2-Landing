@@ -214,6 +214,41 @@ socialRows.forEach((row, index) => {
   });
 });
 
+const locationSection = document.querySelector(".about-contact");
+let locationTicking = false;
+
+if (locationSection) {
+  if (aboutReducedMotion) {
+    locationSection.classList.add("is-location-visible");
+  } else {
+    const locationObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-location-visible");
+          locationObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.16 },
+    );
+    locationObserver.observe(locationSection);
+  }
+}
+
+const updateLocationState = () => {
+  locationTicking = false;
+  if (!locationSection || aboutReducedMotion || innerWidth <= 800) return;
+  const rect = locationSection.getBoundingClientRect();
+  const progress = Math.max(0, Math.min(1, (innerHeight - rect.top) / (innerHeight + rect.height)));
+  locationSection.style.setProperty("--location-drift", progress.toFixed(3));
+};
+
+const requestLocationUpdate = () => {
+  if (locationTicking) return;
+  locationTicking = true;
+  requestAnimationFrame(updateLocationState);
+};
+
 const convergence = document.querySelector(".about-convergence");
 const convergenceScene = document.querySelector(".about-convergence-scene");
 let convergenceTicking = false;
@@ -243,9 +278,12 @@ const requestConvergenceUpdate = () => {
 };
 addEventListener("scroll", requestConvergenceUpdate, { passive: true });
 addEventListener("scroll", requestSocialUpdate, { passive: true });
+addEventListener("scroll", requestLocationUpdate, { passive: true });
 addEventListener("resize", () => {
   requestConvergenceUpdate();
   requestSocialUpdate();
+  requestLocationUpdate();
 });
 requestConvergenceUpdate();
 requestSocialUpdate();
+requestLocationUpdate();

@@ -19,7 +19,7 @@
     />
     <link rel="stylesheet" href="../styles/style.css?v=audit-2" />
     <link rel="stylesheet" href="../styles/brand-logo.css" />
-    <link rel="stylesheet" href="../styles/about.css?v=about-3" />
+    <link rel="stylesheet" href="../styles/about.css?v=about-4" />
   </head>
   <body class="about-page">
     <a class="skip" href="#about-main">Skip to content</a>
@@ -158,17 +158,35 @@
           </div>
 
           <div class="about-location-stage">
-            <div class="about-location-word about-reveal">
+            <div class="about-location-word">
               <p>Based in</p>
-              <h2 id="contact-title">RIYADH<span class="orange">.</span></h2>
+              <h2 id="contact-title">RIYADH</h2>
             </div>
 
-            <div class="about-location-identity" aria-hidden="true">
-              <img src="../Assets/Identity-Lines/guides-vision-identity.png" alt="" />
+            <div class="about-location-system" aria-hidden="true">
+              <svg class="location-city" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
+                <g class="city-secondary">
+                  <path pathLength="1" d="M40 92H336L455 205H940" />
+                  <path pathLength="1" d="M84 474H328L510 302H955" />
+                  <path pathLength="1" d="M188 32V166L330 306V530" />
+                  <path pathLength="1" d="M728 18V136L604 262V542" />
+                  <path pathLength="1" d="M20 305H188L302 418H884" />
+                  <path pathLength="1" d="M416 24V138L532 250V522" />
+                </g>
+                <g class="city-primary">
+                  <path pathLength="1" d="M22 210H282L410 338H972" />
+                  <path pathLength="1" d="M116 542V382L278 220V24" />
+                  <path pathLength="1" d="M872 26V168L742 298V548" />
+                </g>
+                <path class="city-capsule" pathLength="1" d="M492 128H827c88 0 137 55 137 137s-49 137-137 137H492c-88 0-137-55-137-137s49-137 137-137Z" />
+                <path class="city-corridor" pathLength="1" d="M436 265H842" />
+                <path class="city-focus-route" pathLength="1" d="M410 338L610 265H790" />
+              </svg>
               <span class="location-pupil"><i></i></span>
+              <span class="location-callout"><i></i>We are here</span>
             </div>
 
-            <div class="about-location-details about-reveal">
+            <div class="about-location-details">
               <div>
                 <p class="about-connect-label">Location</p>
                 <!-- TEMPORARY LOCATION — replace with approved office location. -->
@@ -180,9 +198,10 @@
               </div>
             </div>
 
-            <a class="about-write about-reveal" data-cursor="WRITE" href="/?contact=open#contact">
-              <small>Have something worth seeing?</small>
-              <span>WRITE TO US</span><i>↗</i>
+            <a class="about-write" data-cursor="WRITE" href="/?contact=open#contact">
+              <small>Next point</small>
+              <span>WRITE TO US</span>
+              <svg viewBox="0 0 42 42" aria-hidden="true"><path d="M8 34L34 8M14 8h20v20" /></svg>
             </a>
           </div>
 
@@ -210,6 +229,6 @@
       </section>
     </main>
 
-    <script src="../scripts/about.js?v=about-3"></script>
+    <script src="../scripts/about.js?v=about-4"></script>
   </body>
 </html>
