@@ -590,6 +590,10 @@ contactForm?.addEventListener("submit", (event) => {
   contactFormStatus.textContent = "Form ready. Connect this form to your approved lead endpoint to send enquiries.";
 });
 
+if (new URLSearchParams(location.search).get("contact") === "open") {
+  addEventListener("load", () => toggleContactForm(true), { once: true });
+}
+
 const menu = document.querySelector(".menu");
 menu.addEventListener("click", () => {
   const open = menu.getAttribute("aria-expanded") === "true";

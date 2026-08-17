@@ -1,0 +1,106 @@
+const aboutReducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const aboutTouch = matchMedia("(pointer: coarse)").matches;
+const aboutBody = document.body;
+const aboutLoader = document.querySelector(".loader");
+
+addEventListener("load", () => {
+  setTimeout(() => {
+    aboutLoader?.classList.add("done");
+    aboutBody.classList.add("is-loaded");
+  }, aboutReducedMotion ? 0 : 650);
+});
+
+const aboutRevealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      aboutRevealObserver.unobserve(entry.target);
+    });
+  },
+  { threshold: 0.12, rootMargin: "0px 0px -7%" },
+);
+document.querySelectorAll(".about-reveal").forEach((item) => aboutRevealObserver.observe(item));
+
+const aboutMenu = document.querySelector(".menu");
+const aboutNav = document.querySelector(".about-nav nav");
+aboutMenu?.addEventListener("click", () => {
+  const isOpen = aboutMenu.getAttribute("aria-expanded") === "true";
+  aboutMenu.setAttribute("aria-expanded", String(!isOpen));
+  aboutNav?.classList.toggle("mobile-open", !isOpen);
+});
+aboutNav?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    aboutMenu?.setAttribute("aria-expanded", "false");
+    aboutNav.classList.remove("mobile-open");
+  });
+});
+
+if (!aboutTouch) {
+  const cursor = document.querySelector(".cursor");
+  let targetX = innerWidth / 2;
+  let targetY = innerHeight / 2;
+  let cursorX = targetX;
+  let cursorY = targetY;
+
+  addEventListener("mousemove", (event) => {
+    targetX = event.clientX;
+    targetY = event.clientY;
+  });
+
+  const drawCursor = () => {
+    cursorX += (targetX - cursorX) * 0.24;
+    cursorY += (targetY - cursorY) * 0.24;
+    if (cursor) cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+    requestAnimationFrame(drawCursor);
+  };
+  drawCursor();
+
+  document.querySelectorAll("a, button, [data-cursor]").forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      cursor?.classList.add("big");
+      cursor?.classList.toggle("write", item.dataset.cursor === "WRITE");
+      if (cursor?.firstElementChild) cursor.firstElementChild.textContent = item.dataset.cursor || "GO";
+    });
+    item.addEventListener("mouseleave", () => cursor?.classList.remove("big", "write"));
+  });
+
+  const heroIdentity = document.querySelector(".about-hero-identity");
+  addEventListener("mousemove", (event) => {
+    if (!heroIdentity || aboutReducedMotion) return;
+    const x = (event.clientX / innerWidth - 0.5) * 10;
+    const y = (event.clientY / innerHeight - 0.5) * 7;
+    heroIdentity.style.translate = `${x}px ${y}px`;
+  });
+}
+
+const convergence = document.querySelector(".about-convergence");
+const convergenceScene = document.querySelector(".about-convergence-scene");
+let convergenceTicking = false;
+
+const updateConvergence = () => {
+  convergenceTicking = false;
+  if (!convergence || !convergenceScene || aboutReducedMotion || innerWidth <= 800) return;
+  const rect = convergence.getBoundingClientRect();
+  const travel = Math.max(1, rect.height - innerHeight);
+  const progress = Math.max(0, Math.min(1, -rect.top / travel));
+  const spread = 32 - progress * 23.5;
+  const markProgress = Math.max(0, Math.min(1, (progress - 0.48) / 0.3));
+  const pupilOpacity = 1 - Math.max(0, Math.min(1, (progress - 0.64) / 0.18));
+
+  convergenceScene.style.setProperty("--convergence-progress", progress.toFixed(3));
+  convergenceScene.style.setProperty("--pupil-spread", `${spread.toFixed(2)}vw`);
+  convergenceScene.style.setProperty("--pupil-opacity", pupilOpacity.toFixed(3));
+  convergenceScene.style.setProperty("--mark-opacity", (markProgress * 0.92).toFixed(3));
+  convergenceScene.style.setProperty("--mark-scale", (0.9 + markProgress * 0.1).toFixed(3));
+  convergenceScene.style.setProperty("--axis-scale", (0.2 + progress * 0.8).toFixed(3));
+};
+
+const requestConvergenceUpdate = () => {
+  if (convergenceTicking) return;
+  convergenceTicking = true;
+  requestAnimationFrame(updateConvergence);
+};
+addEventListener("scroll", requestConvergenceUpdate, { passive: true });
+addEventListener("resize", requestConvergenceUpdate);
+requestConvergenceUpdate();
